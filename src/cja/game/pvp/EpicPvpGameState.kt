@@ -314,7 +314,7 @@ public class EpicPvpGameState : GameState {
             var discard = getPlayerDiscard(player);
             while(discard.cards.size > 0) {
                 var card = discard.pop();
-                //card.isFront = false;
+                card.isFront = false;
                 deck.cards.add(card);
             }
             deck.shuffle();
@@ -323,7 +323,7 @@ public class EpicPvpGameState : GameState {
     }
 
     fun discardCard(player : Boolean, card : EpicPvpCard) {
-        //card.isFront = true;
+        card.isFront = true;
         getPlayerDiscard(player).cards.add(0, card);
     }
 
@@ -411,7 +411,7 @@ public class EpicPvpGameState : GameState {
                     aggressionDrawn = count;
                     while(count > 0) {
                         var draw = aggression.aggression.removeAt(0);
-                        //draw.isFront = true;
+                        draw.isFront = true;
                         hand.hand.add(draw);
                         count--;
                     }
