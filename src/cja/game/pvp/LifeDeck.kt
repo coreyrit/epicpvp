@@ -11,6 +11,6 @@ public class LifeDeck : GameDeck {
 
     override fun draw(g : GameGraphics) {
         super.draw(g);
-        g.drawString1(cards.size().toString(), x + width / 2 - 3f, y + height/2 - 8, 12);
+        g.drawString1(cards.size.toString(), x + width / 2 - 3f, y + height/2 - 8, 12);
     }
 }

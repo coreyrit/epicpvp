@@ -11,6 +11,6 @@ abstract class SpecialCard : EpicPvpCard {
     }
 
     override fun clonePropertiesTo(card : EpicPvpCard) {
-        super.clonePropertiesTo(card);;
+        super.clonePropertiesTo(card);
     }
 }

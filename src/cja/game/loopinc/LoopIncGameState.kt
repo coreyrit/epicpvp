@@ -1,7 +1,7 @@
 package cja.game.loopinc
 
 import cja.game.*
-import java.util.*
+import kotlin.js.Date
 
 class LoopIncGameState : GameState {
     var r : Random = Random(Date().getTime());

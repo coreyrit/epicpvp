@@ -2,7 +2,6 @@ package cja.game.cp
 
 import cja.game.GameGraphics
 import cja.game.Point
-import java.util.*
 
 class BuildRailCard : BuildCard {
     var buildLetter : String = "";
@@ -31,7 +30,7 @@ class BuildRailCard : BuildCard {
         if(!g.lastImageSuccess()) {
             if (isFront) {
                 g.drawString1(buildLetter, x + 5, y + 5, 12);
-                for (src in routes.keySet()) {
+                for (src in routes.keys) {
                     var a = getLocationPoint(src);
                     var b = getLocationPoint(routes[src]);
                     g.drawLine1(x + a.x, y + a.y, x + b.x, y + b.y);

@@ -3,7 +3,6 @@ package cja.game.pvp
 import cja.game.GameCard
 import cja.game.GameGraphics
 import cja.game.GameObject
-import java.util.*
 
 public class Aggression : GameObject {
     var playerColor : String = "";
@@ -26,10 +25,10 @@ public class Aggression : GameObject {
         g.drawRectangle3(x, y, width, height, playerColor, 3);
 
         var offset = 0f;
-        if(aggression.size() > 1) {
-            offset = width / aggression.size();
+        if(aggression.size > 1) {
+            offset = width / aggression.size;
             var delta = 150f - offset;
-            offset -= delta / aggression.size();
+            offset -= delta / aggression.size;
         }
         if(offset > 80f) {
             offset = 80f;
@@ -44,6 +43,6 @@ public class Aggression : GameObject {
             xx += offset;
         }
 
-        g.drawString1(aggression.size().toString(), x + width-15f, y + height-15f, 12);
+        g.drawString1(aggression.size.toString(), x + width-15f, y + height-15f, 12);
     }
 }

@@ -20,7 +20,7 @@ public class MurderOfCrowsCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this);
+        state.discardedCards.remove(this as MoveCard);
     }
 
     override fun startProcess(state : EpicPvpGameState) {
@@ -35,7 +35,7 @@ public class MurderOfCrowsCard : SpecialCard, CardProcess, ButtonsCard {
             for(card in state.getPlayerPermanents(!this.owner)) {
                 chooseCard.hand.add(card);
             }
-            if(chooseCard.hand.size() == 0) {
+            if(chooseCard.hand.size == 0) {
                 endAction(state);
             } else {
                 chooseCard.setPosition(state.moveArea.x+50f, state.moveArea.y-75f, state.moveArea.width-100f, state.moveArea.height+150f);
@@ -48,7 +48,7 @@ public class MurderOfCrowsCard : SpecialCard, CardProcess, ButtonsCard {
                     chooseCard.hand.add(card);
                 }
             }
-            if(chooseCard.hand.size() == 0) {
+            if(chooseCard.hand.size == 0) {
                 endAction(state);
             } else {
                 chooseCard.setPosition(state.moveArea.x+50f, state.moveArea.y-75f, state.moveArea.width-100f, state.moveArea.height+150f);

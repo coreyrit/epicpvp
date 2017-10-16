@@ -12,7 +12,7 @@ public class SkitterAwayCard : SpecialCard {
 
     override fun afterMovePhase(state : EpicPvpGameState) {
         if(state.movesPlayed == 1) {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(state.moveArea.moves.get(card) == null && card.owner != this.owner) {
                     state.discardMove(card, this);
                 }

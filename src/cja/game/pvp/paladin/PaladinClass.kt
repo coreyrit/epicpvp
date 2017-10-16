@@ -1,6 +1,5 @@
 package cja.game.pvp.paladin
 
-import cja.game.GameButton
 import cja.game.GameMessage
 import cja.game.pvp.*
 
@@ -42,7 +41,7 @@ public class PaladinClass : ClassCard, CardProcess, ButtonsCard {
                 endAction(state);
             }
         } else if(discarding && obj == aggression && aggression.highlight) {
-            var card = aggression.aggression.remove(0);
+            var card = aggression.aggression.removeAt(0);
             state.discardCard(this.owner, card);
             endAction(state);
         }
@@ -61,7 +60,7 @@ public class PaladinClass : ClassCard, CardProcess, ButtonsCard {
             for(card in state.getPlayerHand(this.owner).hand) {
                 card.highlight = true;
             }
-            if(state.getPlayerAggression(this.owner).aggression.size() > 0) {
+            if(state.getPlayerAggression(this.owner).aggression.size > 0) {
                 state.getPlayerAggression(this.owner).highlight = true;
             }
         }

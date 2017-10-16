@@ -34,7 +34,7 @@ class TradeCards : GameAction {
         if(gs.players[handnum].scientistName.equals("Geologist")) {
             bonus = 1;
         }
-        if(card != null && destHand != null && destHand.hand.size() < gs.maxCards+1+bonus
+        if(card != null && destHand != null && destHand.hand.size < gs.maxCards+1+bonus
                 && srcHand.highlight && destHand.highlight) {
             srcHand.hand.remove(card);
             destHand.hand.add(card);

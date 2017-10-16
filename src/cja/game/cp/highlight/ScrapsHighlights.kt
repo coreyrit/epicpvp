@@ -11,7 +11,7 @@ class ScrapsHighlights : Highlights {
 
     override fun highlight() {
         for(deck in gs.railDecks) {
-            if(deck.cards.size() > 0) {
+            if(deck.cards.size > 0) {
                 var card = deck.cards[0];
                 if(!card.isFront) {
                     deck.highlight = true;

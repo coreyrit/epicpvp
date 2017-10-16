@@ -5,7 +5,6 @@ import cja.game.pvp.dwarf.*
 import cja.game.pvp.goblin.*
 import cja.game.pvp.human.*
 import cja.game.pvp.paladin.*
-import java.util.*
 
 public class EpicPvpSetup {
 

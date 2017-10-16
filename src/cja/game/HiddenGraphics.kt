@@ -50,7 +50,7 @@ public class HiddenGraphics : GameGraphics {
     }
 
     override fun lastImageSuccess(): Boolean {
-        return false;;
+        return false;
     }
 
 }

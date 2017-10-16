@@ -1,6 +1,5 @@
 package cja.game.pvp.paladin
 
-import cja.game.GameButton
 import cja.game.GameMessage
 import cja.game.pvp.*
 
@@ -50,7 +49,7 @@ public class HolyStrikeCard : MoveCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return HolyStrikeCard(cost, attack, defend);;
+        return HolyStrikeCard(cost, attack, defend);
     }
 
     override fun getButton(label: String): EpicPvpButton {

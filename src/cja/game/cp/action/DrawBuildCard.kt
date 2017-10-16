@@ -2,7 +2,6 @@ package cja.game.cp.action
 
 import cja.game.GameAction
 import cja.game.cp.*
-import java.util.*
 
 class DrawBuildCard : GameAction {
 
@@ -17,8 +16,8 @@ class DrawBuildCard : GameAction {
         card.setPosition(card.x, card.y, 90f, 125f);
         card.isFront = true;
 
-        if(gs.buildDeck.cards.size() == 0) {
-            while(gs.discardDeck.cards.size() > 0) {
+        if(gs.buildDeck.cards.size == 0) {
+            while(gs.discardDeck.cards.size > 0) {
                 var gc = gs.discardDeck.pop();
                 gc.isFront = false;
                 gs.buildDeck.cards.add(gc);
@@ -42,7 +41,7 @@ class DrawBuildCard : GameAction {
                 gs.moveCards.add(card); // keep track of drawn move cards
                 gs.discardDeck.cards.add(card);
 
-                if(gs.moveCards.size() >= 3) { // shuffle movement back in after 3 draws
+                if(gs.moveCards.size >= 3) { // shuffle movement back in after 3 draws
                     gs.turnAction = TurnAction.ShuffleInMovement;
                 } else {
                     gs.turnAction = TurnAction.TimeTravel;
@@ -74,7 +73,7 @@ class DrawBuildCard : GameAction {
             if(gs.players[gs.playerTurn].scientistName.equals("Geologist")) {
                 bonus = 1;
             }
-            if(gs.players[gs.playerTurn].hand.size() > gs.maxCards + bonus) {
+            if(gs.players[gs.playerTurn].hand.size > gs.maxCards + bonus) {
                 gs.turnAction = TurnAction.DiscardBuild;
             } else {
                 // Damage now comes from drawn build cards!

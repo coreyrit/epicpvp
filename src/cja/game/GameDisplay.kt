@@ -1,5 +1,5 @@
 package cja.game
 
 interface GameDisplay {
-    fun getGraphics() : GameGraphics;
+    fun getGraphics(game : Game) : GameGraphics;
 }

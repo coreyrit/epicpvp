@@ -27,7 +27,7 @@ public class MirrorStrikeCard : MoveCard, CardProcess {
                 this.copyPropertiesTo(mirroredCard);
 
                 // replace this with mirror
-                for(target in state.moveArea.moves.keySet()) {
+                for(target in state.moveArea.moves.keys) {
                     if(target == this) {
                         var defend = state.moveArea.moves.remove(target);
                         state.moveArea.assignMove(mirroredCard, defend);
@@ -52,7 +52,7 @@ public class MirrorStrikeCard : MoveCard, CardProcess {
     }
 
     override fun setHighlights(state : EpicPvpGameState) {
-        for(card in state.moveArea.moves.keySet()) {
+        for(card in state.moveArea.moves.keys) {
             if(card.owner == this.owner && card != this) {
                 card.highlight = true;
             } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner && state.moveArea.moves.get(card) != this) {

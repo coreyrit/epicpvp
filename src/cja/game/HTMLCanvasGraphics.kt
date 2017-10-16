@@ -1,13 +1,20 @@
 package cja.game
 
+import cja.game.pvp.EpicPvpGameState
 import org.w3c.dom.*
+import org.w3c.dom.events.MouseEvent
 import kotlin.browser.document
+import kotlin.js.Math
 
 class HTMLCanvasGraphics : GameGraphics {
     val canvas = document.getElementById("canvas") as HTMLCanvasElement;
     val context = canvas.getContext("2d") as CanvasRenderingContext2D
 
     var lastImageDrawn : Boolean = false;
+
+    constructor(game : Game) {
+        canvas.onclick = { ev -> doclick(game, (ev as MouseEvent).clientX, (ev as MouseEvent).clientY); }
+    }
 
     override fun lastImageSuccess() : Boolean {
         return lastImageDrawn;
@@ -32,7 +39,7 @@ class HTMLCanvasGraphics : GameGraphics {
                     context.beginPath();
                     if(flipped) {
                         context.translate(x+w/2.0, y+h/2.0);
-                        context.rotate(180*Math.PI/180);
+                        context.rotate(180* Math.PI/180);
                         context.drawImage(image, -(w/2.0), -(h/2.0), w.toDouble(), h.toDouble());
                     } else {
                         context.drawImage(image, x.toDouble(), y.toDouble(), w.toDouble(), h.toDouble());
@@ -95,7 +102,7 @@ class HTMLCanvasGraphics : GameGraphics {
         var yy = y;
         var words = str.split(" ");
         var line = "";
-        for(n in 0..words.size()-1) {
+        for(n in 0..words.size-1) {
             var testLine = line + words.get(n) + " ";
             var metrics = context.measureText(testLine.trim());
             if(metrics.width > w && n > 0) {
@@ -110,17 +117,17 @@ class HTMLCanvasGraphics : GameGraphics {
         context.restore();
     }
 
-    @native
+//    @native
     override fun drawLine1(x1: Float, y1: Float, x2: Float, y2: Float) {
         drawLine3(x1, y1, x2, y2, "Black", 1);
     }
 
-    @native
+//    @native
     override fun drawLine2(x1: Float, y1: Float, x2: Float, y2: Float, thick: Int) {
         drawLine3(x1, y1, x2, y2, "Black", thick);
     }
 
-    @native
+//    @native
     override fun drawLine3(x1: Float, y1: Float, x2: Float, y2: Float, color: String, thick: Int) {
         context.save();
         context.beginPath();
@@ -130,6 +137,17 @@ class HTMLCanvasGraphics : GameGraphics {
         context.lineTo(x2.toDouble(), y2.toDouble());
         context.stroke();
         context.restore();
+    }
+
+    //    @native("")
+    fun doclick(game : Game, x : Int, y : Int) {
+        game.gameState.handleClick(x + 0.0f, y + 0.0f);
+        game.gameRenderer.render(game);
+        var state = game.gameState as EpicPvpGameState;
+
+        if(state.player1turn) {
+            game.runAi();
+        }
     }
 
 }

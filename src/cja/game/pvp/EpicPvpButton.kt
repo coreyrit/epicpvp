@@ -6,6 +6,6 @@ public class EpicPvpButton : GameButton {
     var card : EpicPvpCard;
 
     constructor(card : EpicPvpCard, label : String) : super(label) {
-        this.card = card;;
+        this.card = card;
     }
 }

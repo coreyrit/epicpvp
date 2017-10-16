@@ -1,7 +1,5 @@
 package cja.game
 
-import java.util.*
-
 open class PlayerHand : GameObject {
     var playerColor : String = "";
     var hand : MutableList<GameCard> = ArrayList<GameCard>();

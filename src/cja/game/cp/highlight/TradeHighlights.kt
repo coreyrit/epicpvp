@@ -14,7 +14,7 @@ class TradeHighlights : Highlights {
 
     override fun highlight() {
         var tradeValid = true;
-        for(i in 0..gs.players.size()-1) {
+        for(i in 0..gs.players.size-1) {
             var hisMat = gs.getPawnMat(gs.pawns[i]);
             if(hisMat == myMat) {
                 gs.players[i].highlight = true;
@@ -23,7 +23,7 @@ class TradeHighlights : Highlights {
             if(gs.players[i].scientistName.equals("Geologist")) {
                 bonus = 1;
             }
-            if(gs.players[i].hand.size() > gs.maxCards+bonus) {
+            if(gs.players[i].hand.size > gs.maxCards+bonus) {
                 tradeValid = false;
             }
         }

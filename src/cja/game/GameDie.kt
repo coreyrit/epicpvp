@@ -1,6 +1,6 @@
 package cja.game
 
-import java.util.*
+import kotlin.js.Date
 
 class GameDie : GameObject {
     var rand : Random = Random(Date().getTime());
@@ -16,7 +16,7 @@ class GameDie : GameObject {
     }
 
     fun roll() {
-        index = rand.nextInt(dieSides.size());
+        index = rand.nextInt(dieSides.size);
     }
 
     fun getValue() : Int {

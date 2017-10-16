@@ -2,7 +2,6 @@ package cja.game.cp
 
 import cja.game.GameGraphics
 import cja.game.Point
-import java.util.*
 
 class RailCard : MatCard {
     var rotated : Boolean = false;
@@ -28,7 +27,7 @@ class RailCard : MatCard {
             g.drawImage1(unavailable, x, y, width, 10f);
         }
         if(!g.lastImageSuccess()) {
-            for (src in routes.keySet()) {
+            for (src in routes.keys) {
                 var a = getLocationPoint(src);
                 var b = getLocationPoint(routes[src]);
                 if (isFront) {

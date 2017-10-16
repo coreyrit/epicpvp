@@ -1,6 +1,5 @@
 package cja.game.pvp.goblin
 
-import cja.game.GameButton
 import cja.game.GameMessage
 import cja.game.pvp.*
 
@@ -47,7 +46,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
                 card.copyPropertiesTo(blankText);
 
                 // replace card with blank
-                for(target in state.moveArea.moves.keySet()) {
+                for(target in state.moveArea.moves.keys) {
                     if(target == card) {
                         var defend = state.moveArea.moves.remove(target);
                         state.moveArea.assignMove(blankText, defend);
@@ -79,7 +78,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
             button1.highlight = true;
             button2.highlight = true;
         } else {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(card.owner != this.owner) {
                     card.highlight = true;
                 } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner != this.owner) {
@@ -92,7 +91,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this);
+        state.discardedCards.remove(this as MoveCard);
         state.specials.remove(this);
         if(state.movesPlayed == 0) {
             // no moves played, can take advantage of special now

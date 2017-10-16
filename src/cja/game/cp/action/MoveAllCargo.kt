@@ -14,8 +14,8 @@ class MoveAllCargo : GameAction {
     }
 
     override fun execute(): Boolean {
-        for(i in gs.players[gs.playerTurn].hand.size()-1..0) {
-            var gc = gs.players[gs.playerTurn].hand.remove(i);
+        for(i in gs.players[gs.playerTurn].hand.size-1..0) {
+            var gc = gs.players[gs.playerTurn].hand.removeAt(i);
             gs.discardDeck.cards.add(gc);
         }
         var lose = false;

@@ -1,7 +1,5 @@
 package cja.game
 
-import java.util.*
-
 abstract class GameState {
     var width : Float = 800f;
     var height : Float = 600f;

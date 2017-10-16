@@ -1,9 +1,9 @@
 package cja.game
 
-import cja.game.cp.CPGameState
+//import cja.game.cp.CPGameState
 import cja.game.pvp.EpicPvpGameState
 import cja.game.pvp.EpicPvpTurn
-import java.util.*
+import kotlin.js.Math
 
 class Game {
     //var gameState : GameState = CPGameState("./img", arrayOf("Geologist", "Physicist"));
@@ -16,8 +16,8 @@ class Game {
     fun run() {
         (gameState as EpicPvpGameState).setup();
         gameState.setHighlights();
-        gameRenderer.render(gameState);
-        click(-1f, -1f);
+        gameRenderer.render(this);
+//        click(-1f, -1f);
     }
 
     fun printSequence(score : Int, route : List<Point>) {
@@ -31,20 +31,20 @@ class Game {
     fun playSequence(route : List<Point>) {
         for(pt in route) {
             gameState.handleClick(pt.x, pt.y);
-            aiRenderer.render(gameState);
+            aiRenderer.render(this);
         }
-        gameRenderer.render(gameState);
+        gameRenderer.render(this);
     }
 
     fun recurseAction(state : EpicPvpGameState, pt : Point, depth : Int, route : List<Point>, choices : MutableList<Pair<Int, List<Point>>>) {
-        aiRenderer.render(state);
+        aiRenderer.render(this);
 
         if(!state.player1turn || state.turnAction == EpicPvpTurn.GameOver) {
             //println(route + ": " + getStateScore(state));
             choices.add(Pair(getStateScore(state), route));
             return;
         }
-//        if(choices.size() > 100) {
+//        if(choices.size > 100) {
 //            println("I fond enough choices");
 //            return;
 //        }
@@ -53,7 +53,7 @@ class Game {
             return;
         }
         state.handleClick(pt.x, pt.y);
-        aiRenderer.render(state);
+        aiRenderer.render(this);
         for(nextPt in state.getValidActions()) {
             var newRoute = ArrayList(route);
             newRoute.add(pt);
@@ -65,23 +65,12 @@ class Game {
         var score = 0;
 
 //        score += state.movesPlayed * 20;
-        score += state.player1life.cards.size() * 100;
-        score += Math.max(state.player1aggression.aggression.size(), 10) * 10;
-        score += state.player1hand.hand.size() * 5;
+        score += state.player1life.cards.size * 100;
+        score += Math.max(state.player1aggression.aggression.size, 10) * 10;
+        score += state.player1hand.hand.size * 5;
         score += state.countMoves(true) * 20;
 
         return score;
-    }
-
-    @native
-    fun click(x : Float, y : Float) {
-        gameState.handleClick(x, y);
-        gameRenderer.render(gameState);
-        var state = gameState as EpicPvpGameState;
-
-        if(state.player1turn) {
-            runAi();
-        }
     }
 
     fun runAi() {
@@ -102,4 +91,8 @@ class Game {
         playSequence(route);
 //        println("----------------------------------------------------------------");
     }
+}
+
+fun main(args: Array<String>) {
+    Game().run();
 }

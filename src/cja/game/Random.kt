@@ -1,13 +1,16 @@
 package cja.game
 
-class Random {
-    var ticks : Int = 0;
+import kotlin.js.Date
+import kotlin.js.Math
 
-    constructor(seed : Int) {
+class Random {
+    var ticks : Double = 0.0;
+
+    constructor(seed : Double) {
         ticks = seed;
     }
 
-    fun next() : Int {
+    fun next() : Double {
         var nextTicks = Date().getTime();
         while(nextTicks == ticks) {
             nextTicks = Date().getTime();
@@ -17,6 +20,6 @@ class Random {
     }
 
     fun nextInt(maxValue : Int) : Int {
-        return next() % maxValue;
+        return Math.round(next() % maxValue);
     }
 }

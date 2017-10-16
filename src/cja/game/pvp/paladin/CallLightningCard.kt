@@ -1,6 +1,5 @@
 package cja.game.pvp.paladin
 
-import cja.game.GameButton
 import cja.game.GameMessage
 import cja.game.pvp.*
 
@@ -22,8 +21,8 @@ public class CallLightningCard : SpecialCard, CardProcess, ButtonsCard {
         } else if(obj == button2) {
             var aggression = state.getPlayerAggression(!this.owner);
             for(i in 1..2) {
-                if(aggression.aggression.size() > 0) {
-                    var card = aggression.aggression.remove(0);
+                if(aggression.aggression.size > 0) {
+                    var card = aggression.aggression.removeAt(0);
                     card.isFront = true;
                     state.discardCard(!this.owner, card);
                 }

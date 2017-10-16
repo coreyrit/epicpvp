@@ -25,8 +25,8 @@ public class DruidClass : ClassCard, CardProcess, ButtonsCard {
 
         if(obj == button1) {
             var aggression = state.getPlayerAggression(this.owner);
-            if(aggression.aggression.size() > 0) {
-                var card = aggression.aggression.remove(0);
+            if(aggression.aggression.size > 0) {
+                var card = aggression.aggression.removeAt(0);
                 state.discardCard(this.owner, card);
                 if("Basic Strike".equals(card.name)) {
                     blockAll = true;
@@ -65,9 +65,9 @@ public class DruidClass : ClassCard, CardProcess, ButtonsCard {
 
     override fun afterMovePhase(state : EpicPvpGameState) {
         if(blockAll && state.movesPlayed > 0) {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(card.owner != this.owner) {
-                    state.discardMove(card, this);
+                    state.discardMove(card, this as EpicPvpCard);
                 }
             }
         }

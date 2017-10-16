@@ -11,7 +11,7 @@ public class BattlePrayerCard : SpecialCard {
     }
 
     override fun afterEndPhase(state : EpicPvpGameState) {
-        for(card in state.moveArea.moves.keySet()) {
+        for(card in state.moveArea.moves.keys) {
             if(card.owner == this.owner && card.delta >= 3) {
                 state.getPlayerLife(this.owner).cards.add(state.drawCard(this.owner));
                 var draw = state.drawCard(this.owner);

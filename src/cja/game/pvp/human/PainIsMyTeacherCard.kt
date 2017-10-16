@@ -1,6 +1,5 @@
 package cja.game.pvp.human
 
-import cja.game.GameButton
 import cja.game.GameMessage
 import cja.game.pvp.*
 
@@ -51,7 +50,7 @@ public class PainIsMyTeacherCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this);
+        state.discardedCards.remove(this as MoveCard);
         state.specials.remove(this);
     }
 

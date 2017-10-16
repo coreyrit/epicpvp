@@ -3,7 +3,7 @@ package cja.game.pvp
 import cja.game.GameDeck
 import cja.game.PlayerHand
 import cja.game.Random
-import java.util.*
+import kotlin.js.Date
 
 public class PlayerArea {
     var r : Random = Random(Date().getTime());

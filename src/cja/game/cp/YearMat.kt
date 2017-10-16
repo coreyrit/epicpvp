@@ -1,7 +1,6 @@
 package cja.game.cp
 
 import cja.game.*
-import java.util.*
 
 class YearMat : GameMat {
     var matYear : Int = 0;
@@ -37,7 +36,7 @@ class YearMat : GameMat {
             if(isDamaged(nl.number)) return MoveResult.DamagedRail;
 
             var rails = squares[nl.number-1];
-            var rail = rails[rails.size()-1] as RailCard;
+            var rail = rails[rails.size-1] as RailCard;
 
             if(!rail.routes.containsKey(nl.location)) {
                 return MoveResult.MissingRail;
@@ -95,7 +94,7 @@ class YearMat : GameMat {
             }
 
             var rails = squares[nl.number-1];
-            var rail = rails[rails.size()-1] as RailCard;
+            var rail = rails[rails.size-1] as RailCard;
             if(!rail.routes.containsKey(nl.location)) {
                 return MoveResult.MismatchedRail;
             }
@@ -129,7 +128,7 @@ class YearMat : GameMat {
     }
 
     fun isEmpty(number : Int) : Boolean {
-        return squares[number-1].size() == 0;
+        return squares[number-1].size == 0;
     }
 
     fun isDamaged(number : Int) : Boolean {
@@ -142,7 +141,7 @@ class YearMat : GameMat {
     }
 
     fun cardAt(number : Int) : MatCard? {
-        var count = squares[number-1].size();
+        var count = squares[number-1].size;
         if(count > 0) {
             return squares[number-1][count-1];
         } else {
@@ -160,7 +159,7 @@ class YearMat : GameMat {
     }
 
     fun isRail(number : Int) : Boolean {
-        var count = squares[number-1].size();
+        var count = squares[number-1].size;
         if(count > 0) {
             if(squares[number-1][count-1] is RailCard) {
                 return true;
@@ -170,7 +169,7 @@ class YearMat : GameMat {
     }
 
     fun clearHighlights() {
-        for(i in 0..highlights.size()-1) {
+        for(i in 0..highlights.size-1) {
             highlights[i] = false;
         }
     }
@@ -186,7 +185,7 @@ class YearMat : GameMat {
             else -> column3;
         }
 
-        for(i in 0..col.size()-1) {
+        for(i in 0..col.size-1) {
             var number = col[i];
             if(isDamaged(number)) {
                 return false;
@@ -213,7 +212,7 @@ class YearMat : GameMat {
             else -> column3;
         }
 
-        for(i in 0..col.size()-1) {
+        for(i in 0..col.size-1) {
             var number = col[i];
             if(isDamaged(number)) {
                 return false;
@@ -231,10 +230,10 @@ class YearMat : GameMat {
     }
 
     fun repairSquare(number : Int, deck : GameDeck) {
-        for(i in 0..squares[number-1].size()-1) {
+        for(i in 0..squares[number-1].size-1) {
             if(squares[number-1][i] is DamageGem) {
                 //deck.cards.add((squares[number-1] as MutableList).remove(i));
-                var gem = (squares[number-1] as MutableList).remove(i);
+                var gem = (squares[number-1] as MutableList).removeAt(i);
                 gem.setPosition(770f, 340f, 25f, 25f);
                 return;
             }
@@ -279,7 +278,7 @@ class YearMat : GameMat {
     }
 
     fun getPawnNumber(pawn : GamePawn) : Int {
-        for(i in 0..pawns.size()-1) {
+        for(i in 0..pawns.size-1) {
             if(pawns[i].contains(pawn)) {
                 return i+1;
             }
@@ -317,7 +316,7 @@ class YearMat : GameMat {
                     //g.drawRectangle3(xx-2, yy-2, sqw+4, sqh+4, "Black", 5);
                 }
 
-                for(p in 0..pawns[i].size()-1) {
+                for(p in 0..pawns[i].size-1) {
                     var pawn = pawns[i][p];
                     when(p) {
                         0 -> pawn.setPosition(xx, yy+35, 30f, 30f);

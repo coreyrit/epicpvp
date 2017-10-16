@@ -11,7 +11,7 @@ public class ViciousElbowCard : MoveCard {
     }
 
     override fun afterMovePhase(state : EpicPvpGameState) {
-        for(card in state.moveArea.moves.keySet()) {
+        for(card in state.moveArea.moves.keys) {
             if(card != this && card.owner == this.owner) {
                 card.attack++;
             } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner && state.moveArea.moves.get(card) != this) {

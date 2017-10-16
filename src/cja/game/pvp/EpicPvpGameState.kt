@@ -6,7 +6,6 @@ import cja.game.pvp.dwarf.DwarfRace
 import cja.game.pvp.goblin.*
 import cja.game.pvp.human.*
 import cja.game.pvp.paladin.*
-import java.util.*
 
 public class EpicPvpGameState : GameState {
     var allCards : MutableMap<Int, EpicPvpCard> = HashMap();
@@ -214,7 +213,7 @@ public class EpicPvpGameState : GameState {
         for(card in player2aggression.aggression) {
             card.highlight = false;
         }
-        for(card in moveArea.moves.keySet()) {
+        for(card in moveArea.moves.keys) {
             card.highlight = false;
         }
         for(card in player1discard.cards) {
@@ -230,7 +229,7 @@ public class EpicPvpGameState : GameState {
 
         // current player's turn first
 //        var turn1 = (player1turn && turnAction != EpicPvpTurn.DrawAggression) || (!player1turn && turnAction == EpicPvpTurn.DrawAggression);
-        if(getCardProcesses(player1turn).size() > 0) {
+        if(getCardProcesses(player1turn).size > 0) {
             getCardProcesses(player1turn).get(0).setHighlights(this);
             return;
         }
@@ -245,7 +244,7 @@ public class EpicPvpGameState : GameState {
         var hand = getPlayerHand(player1turn);
 
         if(movesPlayed == 0) {
-            aggressionRemaining = aggression.aggression.size();
+            aggressionRemaining = aggression.aggression.size;
         }
 
         if(turnAction == EpicPvpTurn.DrawAggression) {
@@ -272,7 +271,7 @@ public class EpicPvpGameState : GameState {
         if(turnAction == EpicPvpTurn.AssignMove) {
             selectedMoveCard!!.embelish = true;
             moveArea.highlight = true;
-            for(card in moveArea.moves.keySet()) {
+            for(card in moveArea.moves.keys) {
                 if(card.owner != player1turn &&
                         moveArea.moves.get(card) == null &&
                         //selectedMoveCard!!.canBlock(card) && // Allow any assign because of modifiers
@@ -294,14 +293,14 @@ public class EpicPvpGameState : GameState {
 
     fun dealDamage(player : Boolean) {
         var life = getPlayerLife(player);
-        if(life.cards.size() > 0) {
+        if(life.cards.size > 0) {
             var lifeCard = life.pop() as EpicPvpCard;
             discardCard(player, lifeCard);
         }
 
         damageTaken++;
 
-        if(life.cards.size() == 0) {
+        if(life.cards.size == 0) {
             // GAME OVER
             clearHighlights();
             setTurnAction(EpicPvpTurn.GameOver);
@@ -310,12 +309,12 @@ public class EpicPvpGameState : GameState {
 
     fun drawCard(player : Boolean) : EpicPvpCard {
         var deck = getPlayerDeck(player);
-        if(deck.cards.size() == 0) {
+        if(deck.cards.size == 0) {
             dealDamage(player);
             var discard = getPlayerDiscard(player);
-            while(discard.cards.size() > 0) {
+            while(discard.cards.size > 0) {
                 var card = discard.pop();
-                card.isFront = false;
+                //card.isFront = false;
                 deck.cards.add(card);
             }
             deck.shuffle();
@@ -324,7 +323,7 @@ public class EpicPvpGameState : GameState {
     }
 
     fun discardCard(player : Boolean, card : EpicPvpCard) {
-        card.isFront = true;
+        //card.isFront = true;
         getPlayerDiscard(player).cards.add(0, card);
     }
 
@@ -350,7 +349,7 @@ public class EpicPvpGameState : GameState {
 
     fun countMoves(player : Boolean) : Int {
         var count = 0;
-        for(card in moveArea.moves.keySet()) {
+        for(card in moveArea.moves.keys) {
             if (card.owner == player || (moveArea.moves.get(card) != null && moveArea.moves.get(card)!!.owner == player)) {
                 count++;
             }
@@ -359,7 +358,7 @@ public class EpicPvpGameState : GameState {
     }
 
     fun checkForNextPlayerTurn(player : Boolean) {
-        if(turnAction == EpicPvpTurn.EndPhase && getCardProcesses(player).size() == 0) {
+        if(turnAction == EpicPvpTurn.EndPhase && getCardProcesses(player).size == 0) {
             discardedCards.clear();
             aggressionDraw = 2;
             specials.clear();
@@ -372,7 +371,7 @@ public class EpicPvpGameState : GameState {
     override fun handleClick(ptx : Float, pty : Float) : Boolean {
         // player's turn first
 //        var turn1 = (player1turn && turnAction != EpicPvpTurn.DrawAggression) || (!player1turn && turnAction == EpicPvpTurn.DrawAggression);
-        if(getCardProcesses(player1turn).size() > 0) {
+        if(getCardProcesses(player1turn).size > 0) {
             getCardProcesses(player1turn).get(0).handleClick(this, ptx, pty);
             setHighlights();
             return true;
@@ -394,7 +393,7 @@ public class EpicPvpGameState : GameState {
         if(obj != null) {
             if(turnAction == EpicPvpTurn.DrawAggression && obj == gameDeck) {
 //                println("draw aggression");
-                for(card in moveArea.moves.keySet()) {
+                for(card in moveArea.moves.keys) {
                     card.beforeAggressionPhase(this);
                 }
                 for(i in 1..aggressionDraw) {
@@ -408,18 +407,18 @@ public class EpicPvpGameState : GameState {
                 aggressionDrawn = 0;
                 if(card != null && card.highlight) {
                     // draw every card up to this one
-                    var count = aggression.aggression.size() - aggression.aggression.indexOf(card);
+                    var count = aggression.aggression.size - aggression.aggression.indexOf(card);
                     aggressionDrawn = count;
                     while(count > 0) {
-                        var draw = aggression.aggression.remove(0);
-                        draw.isFront = true;
+                        var draw = aggression.aggression.removeAt(0);
+                        //draw.isFront = true;
                         hand.hand.add(draw);
                         count--;
                     }
                 }
 
                 // notify of draw phase
-                for(move in moveArea.moves.keySet()) {
+                for(move in moveArea.moves.keys) {
                     move.afterDrawPhase(this);
                 }
 
@@ -463,7 +462,7 @@ public class EpicPvpGameState : GameState {
                     // finished playing moves
                     getPlayerRace(player1turn).afterMovePhase(this);
                     getPlayerClass(player1turn).afterMovePhase(this);
-                    for(move in moveArea.moves.keySet()) {
+                    for(move in moveArea.moves.keys) {
                         if(move.owner == player1turn) {
                             move.afterMovePhase(this);
                         } else if(moveArea.moves.get(move) != null && moveArea.moves.get(move)!!.owner == player1turn) {
@@ -483,7 +482,7 @@ public class EpicPvpGameState : GameState {
             }
             else if(turnAction == EpicPvpTurn.AssignMove && obj == moveArea) {
 //                println("assign move");
-                hand.hand.remove(selectedMoveCard);
+                hand.hand.remove(selectedMoveCard as GameCard);
                 selectedMoveCard!!.embelish = false;
 
                 var card = moveArea.getCardAt(ptx, pty);
@@ -507,7 +506,7 @@ public class EpicPvpGameState : GameState {
 //            println("resolve moves");
 
             // move invalid defends off of attacks
-            for(card in moveArea.moves.keySet()) {
+            for(card in moveArea.moves.keys) {
                 if(moveArea.moves.get(card) != null && !moveArea.moves.get(card)!!.canBlock(card)) {
                     var defend = moveArea.moves.get(card);
                     moveArea.moves.put(card, null);
@@ -516,7 +515,7 @@ public class EpicPvpGameState : GameState {
             }
 
             // now resolve damage
-            for(card in moveArea.moves.keySet()) {
+            for(card in moveArea.moves.keys) {
                 if(moveArea.moves.get(card) == null) {
                     if(card.owner == player1turn) {
                         card.isRotated = !card.isRotated;
@@ -587,7 +586,7 @@ public class EpicPvpGameState : GameState {
                 if(obj.highlight) {
                     actions.add(Point(obj.x + obj.width - 2, obj.y + obj.height - 2));
                 }
-                for(card in obj.moves.keySet()) {
+                for(card in obj.moves.keys) {
                     if(card.highlight) {
                         actions.add(Point(card.x + 2, card.y + 2));
                     }

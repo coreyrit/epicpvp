@@ -2,7 +2,6 @@ package cja.game.loopinc
 
 import cja.game.GameMat
 import cja.game.GamePawn
-import java.util.*
 
 public class PlayerBoard : GameMat {
     var mark1day1 : GamePawn = GamePawn("");

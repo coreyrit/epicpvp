@@ -23,7 +23,7 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
         var obj = state.getObjectAt(ptx, pty);
 
         if(obj == button1) {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(card.owner == this.owner) {
                     card.attack += 2;
                 } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner) {
@@ -33,10 +33,10 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
             endAction(state);
         } else if(obj == button2) {
             choosing = true;
-            for(card in state.getPlayerHand(!this.owner)) {
+            for(card in state.getPlayerHand(!this.owner).hand) {
                 chooseCard.hand.add(card);
             }
-            if(chooseCard.hand.size() == 0) {
+            if(chooseCard.hand.size == 0) {
                 endAction(state);
             } else {
                 chooseCard.setPosition(state.moveArea.x+50f, state.moveArea.y-75f, state.moveArea.width-100f, state.moveArea.height+150f);

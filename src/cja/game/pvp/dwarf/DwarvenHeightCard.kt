@@ -1,9 +1,6 @@
 package cja.game.pvp.dwarf
 
-import cja.game.pvp.BasicStrikeCard
-import cja.game.pvp.EpicPvpCard
-import cja.game.pvp.EpicPvpGameState
-import cja.game.pvp.SpecialCard
+import cja.game.pvp.*
 
 public class DwarvenHeightCard : SpecialCard {
     constructor(img : String) : super("Dwarven Height") {
@@ -13,12 +10,12 @@ public class DwarvenHeightCard : SpecialCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this);
+        state.discardedCards.remove(this as MoveCard);
         state.specials.remove(this);
     }
 
     override fun afterMovePhase(state: EpicPvpGameState) {
-        for(card in state.moveArea.moves.keySet()) {
+        for(card in state.moveArea.moves.keys) {
             if(card.owner == this.owner && card is BasicStrikeCard) {
                 card.defend++;
             } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner && state.moveArea.moves.get(card) is BasicStrikeCard) {

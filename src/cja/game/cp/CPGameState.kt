@@ -3,7 +3,7 @@ package cja.game.cp
 import cja.game.*
 import cja.game.cp.action.*
 import cja.game.cp.highlight.*
-import java.util.*
+import kotlin.js.Date
 
 class CPGameState : GameState {
     var numPlayers : Int = 2;
@@ -54,20 +54,20 @@ class CPGameState : GameState {
 
     constructor(pth : String, sc : Array<String>) {
         this.path = pth;
-        selectedScientists = sc.toArrayList();
+        selectedScientists = sc.asList();
         initialize();
     }
 
     fun initialize() {
-        for(j in 0..selectedScientists.size()-1) {
-            for(i in 0..playerNames.size()-1) {
+        for(j in 0..selectedScientists.size-1) {
+            for(i in 0..playerNames.size-1) {
                 if(playerNames[i].equals(selectedScientists[j])) {
                     scientists.add(Scientist(playerNames[i], playerColors[i], pawnColors[i], pawnMats[i]));
                 }
             }
         }
 
-        numPlayers = scientists.size();
+        numPlayers = scientists.size;
         maxCards = when(numPlayers) {
             2 -> 6;
             3 -> 4;
@@ -102,7 +102,7 @@ class CPGameState : GameState {
         var x = 100f;
         var y = 20f;
         var years = arrayOf(1930, 1957, 1984, 2011);
-        for(i in 1..years.size()) {
+        for(i in 1..years.size) {
             var yearMat = YearMat(years[i-1], path + "/mats/terrain" + i + ".png", null);
             yearMat.setPosition(x, y, 155f, 390f);
             gameObjects.add(yearMat);
@@ -114,7 +114,7 @@ class CPGameState : GameState {
         x = 770f;
         y = 20f;
 
-        for(i in 1..letters.size()) {
+        for(i in 1..letters.size) {
             var railDeck = GameDeck(Random(Date().getTime()));
             railDecks.add(railDeck);
             railDeck.setPosition(x, y, 50f, 70f);
@@ -153,7 +153,7 @@ class CPGameState : GameState {
         var railCol = 1;
         var yearCounts = arrayOf(2, 3, 3, 4);
         for(j in 0..numLetters-1) {
-            for(i in 1..letters.size()) {
+            for(i in 1..letters.size) {
                 var card = BuildRailCard(letters[i - 1], path + "/build/build" + i + ".png", path + "/build/crommelin_periapsis.png", railCol);
                 addRoutes(card, letters[i-1], cardsFlipped);
                 card.isFront = false;
@@ -172,7 +172,7 @@ class CPGameState : GameState {
             buildDeck.cards.add(card);
         }
 
-        for(i in 0..years.size()-1) {
+        for(i in 0..years.size-1) {
             for(j in 0..yearCounts[i]-1) {
                 var card = MoveCard(years[i], path + "/build/move_" + years[i] + ".png", path + "/build/crommelin_periapsis.png");
                 card.isFront = false;
@@ -225,7 +225,7 @@ class CPGameState : GameState {
         }
 
         for(i in 0..maxCards-2) {
-            for(j in 0..players.size()-1) {
+            for(j in 0..players.size-1) {
                 var card = buildDeck.pop();
                 while(card is MoveCard) {
                     buildDeck.cards.add(card);
@@ -240,7 +240,7 @@ class CPGameState : GameState {
             }
         }
 
-        println("adding " + players.size() + " players");
+        println("adding " + players.size + " players");
         gameObjects.addAll(players);
 
         var buttonsY = 440f;
@@ -394,7 +394,7 @@ class CPGameState : GameState {
                 else -> "";
             }
         }
-        message += "  [" + getScore() + "] (" + moveCards.size() + ")";
+        message += "  [" + getScore() + "] (" + moveCards.size + ")";
         return message;
     }
 
@@ -449,7 +449,7 @@ class CPGameState : GameState {
     fun nextPlayerTurn() {
         turnAction = TurnAction.DrawBuild;
         playerTurn++;
-        if(playerTurn >= players.size()) {
+        if(playerTurn >= players.size) {
             playerTurn = 0;
         }
         movements = 0;
@@ -469,7 +469,7 @@ class CPGameState : GameState {
 
         flipButton.highlight = true;
 
-        if(turnAction == TurnAction.BuildRepair && players[playerTurn].hand.size() > 0) {
+        if(turnAction == TurnAction.BuildRepair && players[playerTurn].hand.size > 0) {
             moveAllButton.highlight = true;
         }
 

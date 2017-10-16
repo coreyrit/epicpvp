@@ -1,11 +1,11 @@
 package cja.game
 
 abstract class GameRenderer {
-    fun render(state : GameState) : GameDisplay {
-        var bmp = createDisplay(state.width, state.height);
-        var g = bmp.getGraphics();
-        g.fillRectangle1(0f, 0f, state.width, state.height, "White");
-        for(obj in state.gameObjects.reversed()) { // draw in reverse order
+    fun render(game : Game) : GameDisplay {
+        var bmp = createDisplay(game.gameState.width, game.gameState.height);
+        var g = bmp.getGraphics(game);
+        g.fillRectangle1(0f, 0f, game.gameState.width, game.gameState.height, "White");
+        for(obj in game.gameState.gameObjects.reversed()) { // draw in reverse order
             obj.draw(g);
             if(obj.highlight) {
                 //println("highlighting " + obj);

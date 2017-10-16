@@ -22,7 +22,7 @@ public class BlessedBladeCard : MoveCard, CardProcess, ButtonsCard {
         var obj = state.getObjectAt(ptx, pty);
 
         if(obj == button1) {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(card == this) {
                     state.moveArea.moves.remove(card);
                 } else if(state.moveArea.moves.get(card) == this) {
@@ -60,7 +60,7 @@ public class BlessedBladeCard : MoveCard, CardProcess, ButtonsCard {
             button1.highlight = true;
             button2.highlight = true;
         } else {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(card.owner == this.owner) {
                     card.highlight = true;
                 } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner) {

@@ -35,7 +35,7 @@ public class PowerStrikeCard : SpecialCard, CardProcess {
     }
 
     override fun setHighlights(state : EpicPvpGameState) {
-        for(card in state.moveArea.moves.keySet()) {
+        for(card in state.moveArea.moves.keys) {
             if(card.owner == this.owner) {
                 card.highlight = true;
             } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner) {

@@ -18,7 +18,7 @@ class BuildRepairHighlights : Highlights {
         var empty = myMat.isEmpty(pawnNumber);
         var anyUnavailable = false;
         for(deck in gs.railDecks) {
-            if(deck.cards.size() > 0) {
+            if(deck.cards.size > 0) {
                 var card = deck.cards[0] as RailCard;
                 if(card.isFront) {
                     var count = 0;
@@ -46,7 +46,7 @@ class BuildRepairHighlights : Highlights {
             }
         }
 
-        if(anyUnavailable && gs.players[gs.playerTurn].hand.size() > 0) {
+        if(anyUnavailable && gs.players[gs.playerTurn].hand.size > 0) {
             for(card in gs.scrapCards) {
                 if(card.isFront) {
                     card.highlight = true;

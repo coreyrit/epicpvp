@@ -2,7 +2,6 @@ package cja.game.cp.action
 
 import cja.game.GameAction
 import cja.game.cp.CPGameState
-import cja.game.cp.DamageCard
 import cja.game.cp.TurnAction
 
 class DrawDamageCard : GameAction {
@@ -43,7 +42,7 @@ class DrawDamageCard : GameAction {
         if(gs.players[gs.playerTurn].scientistName.equals("Geologist")) {
             bonus = 1;
         }
-        if(gs.players[gs.playerTurn].hand.size() > gs.maxCards + bonus) {
+        if(gs.players[gs.playerTurn].hand.size > gs.maxCards + bonus) {
             gs.turnAction = TurnAction.DiscardBuild;
         } else {
             gs.turnAction = TurnAction.TimeTravel;

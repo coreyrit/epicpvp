@@ -61,7 +61,7 @@ public class GoForTheKneesCard : MoveCard, CardProcess, ButtonsCard {
             button1.highlight = true;
             button2.highlight = true;
         } else {
-            for(card in state.moveArea.moves.keySet()) {
+            for(card in state.moveArea.moves.keys) {
                 if(card.owner == this.owner) {
                     card.highlight = true;
                 } else if(state.moveArea.moves.get(card) != null && state.moveArea.moves.get(card)!!.owner == this.owner) {

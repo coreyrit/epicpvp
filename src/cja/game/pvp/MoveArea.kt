@@ -1,9 +1,7 @@
 package cja.game.pvp
 
-import cja.game.GameCard
 import cja.game.GameGraphics
 import cja.game.GameObject
-import java.util.*
 
 public class MoveArea : GameObject {
     var moves : MutableMap<MoveCard, MoveCard?> = LinkedHashMap();
@@ -13,7 +11,7 @@ public class MoveArea : GameObject {
     }
 
     fun getCardAt(x : Float, y : Float) : MoveCard? {
-        for(card in moves.keySet()) {
+        for(card in moves.keys) {
             var defend = moves.get(card);
             if(defend != null && x >= defend.x && x <= defend.x+card.width && y >= defend.y && y <= defend.y+defend.height) {
                 return defend;
@@ -33,7 +31,7 @@ public class MoveArea : GameObject {
         g.drawRectangle3(x, y, width, height, "black", 3);
         var xx = x+5;
         var yy = y+5;
-        for(card in moves.keySet()) {
+        for(card in moves.keys) {
             card.setPosition(xx, yy, card.width, card.height);
             card.draw(g);
 
@@ -59,7 +57,7 @@ public class MoveArea : GameObject {
         moveArea.y = y;
         moveArea.width = width;
         moveArea.height = height;
-        for(card in moves.keySet()) {
+        for(card in moves.keys) {
             var pvp = card.create();
             card.clonePropertiesTo(pvp);
             state.allCards.put(pvp.id, pvp);

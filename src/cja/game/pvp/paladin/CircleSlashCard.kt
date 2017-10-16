@@ -3,7 +3,6 @@ package cja.game.pvp.paladin
 import cja.game.pvp.EpicPvpCard
 import cja.game.pvp.EpicPvpGameState
 import cja.game.pvp.MoveCard
-import java.util.*
 
 public class CircleSlashCard : MoveCard {
 
@@ -17,7 +16,7 @@ public class CircleSlashCard : MoveCard {
 
         // get a list of unblocked attacks
         var unblocked = ArrayList<MoveCard>();
-        for(card in state.moveArea.moves.keySet()) {
+        for(card in state.moveArea.moves.keys) {
             if(card.owner != this.owner && state.moveArea.moves.get(card) == null) {
                 unblocked.add(card);
             }
@@ -25,8 +24,8 @@ public class CircleSlashCard : MoveCard {
 
         // find every combination of unblocked attacks
         var combinations = ArrayList<ArrayList<MoveCard>>();
-        for(i in 0..unblocked.size()-1) {
-            for(j in 0..combinations.size()-1) {
+        for(i in 0..unblocked.size-1) {
+            for(j in 0..combinations.size-1) {
                 var temp = ArrayList(combinations.get(j));
                 temp.add(unblocked.get(i));
                 combinations.add(temp);

@@ -17,11 +17,11 @@ class MoveHighlights : Highlights {
     override fun highlight() {
         gs.pawns[gs.playerTurn].highlight = true;
         var moves = gs.allowedMovement[pawnNumber];
-        for(num in moves) {
-            if(!myMat.isBlocked(num)) {
-                myMat.highlightSquare(num);
-            }
-        }
+//        for(num in moves) {
+//            if(!myMat.isBlocked(num)) {
+//                myMat.highlightSquare(num);
+//            }
+//        }
         myMat.highlightSquare(pawnNumber);
         if(gs.players[gs.playerTurn].scientistName.equals("Physicist")) {
             for(num in 1..15) {
