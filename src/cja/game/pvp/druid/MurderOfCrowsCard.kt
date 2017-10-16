@@ -20,7 +20,7 @@ public class MurderOfCrowsCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this as MoveCard);
+//        state.discardedCards.remove(this);
     }
 
     override fun startProcess(state : EpicPvpGameState) {

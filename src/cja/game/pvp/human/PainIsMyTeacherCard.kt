@@ -50,7 +50,7 @@ public class PainIsMyTeacherCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this as MoveCard);
+//        state.discardedCards.remove(this);
         state.specials.remove(this);
     }
 

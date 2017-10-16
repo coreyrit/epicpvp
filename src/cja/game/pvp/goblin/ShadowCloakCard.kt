@@ -91,7 +91,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-        state.discardedCards.remove(this as MoveCard);
+//        state.discardedCards.remove(this);
         state.specials.remove(this);
         if(state.movesPlayed == 0) {
             // no moves played, can take advantage of special now
