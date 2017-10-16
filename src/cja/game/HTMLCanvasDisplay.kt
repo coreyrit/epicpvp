@@ -1,7 +1,15 @@
 package cja.game
 
+import org.w3c.dom.events.Event
+
 class HTMLCanvasDisplay : GameDisplay {
-    override fun getGraphics(game : Game) : GameGraphics {
-        return HTMLCanvasGraphics(game);
+
+    var clickHandler : ((Event) -> dynamic)?
+    constructor(handler : ((Event) -> dynamic)?) {
+        clickHandler = handler;
+    }
+
+    override fun getGraphics() : GameGraphics {
+        return HTMLCanvasGraphics(clickHandler);
     }
 }

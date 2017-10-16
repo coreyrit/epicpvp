@@ -3,21 +3,22 @@ package cja.game
 //import cja.game.cp.CPGameState
 import cja.game.pvp.EpicPvpGameState
 import cja.game.pvp.EpicPvpTurn
+import org.w3c.dom.events.MouseEvent
 import kotlin.js.Math
 
 class Game {
     //var gameState : GameState = CPGameState("./img", arrayOf("Geologist", "Physicist"));
 
     val gameState: GameState = EpicPvpGameState("./img");
-    var gameRenderer : GameRenderer = HTMLCanvasRenderer();
+    var gameRenderer : GameRenderer = HTMLCanvasRenderer({ev -> click((ev as MouseEvent).clientX, (ev as MouseEvent).clientY)});
 
     var aiRenderer : GameRenderer = HiddenRenderer();
 
     fun run() {
         (gameState as EpicPvpGameState).setup();
         gameState.setHighlights();
-        gameRenderer.render(this);
-//        click(-1f, -1f);
+        gameRenderer.render(gameState);
+        click(-1, -1);
     }
 
     fun printSequence(score : Int, route : List<Point>) {
@@ -31,13 +32,13 @@ class Game {
     fun playSequence(route : List<Point>) {
         for(pt in route) {
             gameState.handleClick(pt.x, pt.y);
-            aiRenderer.render(this);
+            aiRenderer.render(gameState);
         }
-        gameRenderer.render(this);
+        gameRenderer.render(gameState);
     }
 
     fun recurseAction(state : EpicPvpGameState, pt : Point, depth : Int, route : List<Point>, choices : MutableList<Pair<Int, List<Point>>>) {
-        aiRenderer.render(this);
+        aiRenderer.render(state);
 
         if(!state.player1turn || state.turnAction == EpicPvpTurn.GameOver) {
             //println(route + ": " + getStateScore(state));
@@ -53,7 +54,7 @@ class Game {
             return;
         }
         state.handleClick(pt.x, pt.y);
-        aiRenderer.render(this);
+        aiRenderer.render(state);
         for(nextPt in state.getValidActions()) {
             var newRoute = ArrayList(route);
             newRoute.add(pt);
@@ -90,6 +91,17 @@ class Game {
         printSequence(max, route);
         playSequence(route);
 //        println("----------------------------------------------------------------");
+    }
+
+    //    @native("")
+    fun click(x : Int, y : Int) {
+        gameState.handleClick(x + 0.0f, y + 0.0f);
+        gameRenderer.render(gameState);
+        var state = gameState as EpicPvpGameState;
+
+        if(state.player1turn) {
+            runAi();
+        }
     }
 }
 

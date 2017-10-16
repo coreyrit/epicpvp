@@ -1,8 +1,7 @@
 package cja.game
 
-import cja.game.pvp.EpicPvpGameState
 import org.w3c.dom.*
-import org.w3c.dom.events.MouseEvent
+import org.w3c.dom.events.Event
 import kotlin.browser.document
 import kotlin.js.Math
 
@@ -12,8 +11,8 @@ class HTMLCanvasGraphics : GameGraphics {
 
     var lastImageDrawn : Boolean = false;
 
-    constructor(game : Game) {
-        canvas.onclick = { ev -> doclick(game, (ev as MouseEvent).clientX, (ev as MouseEvent).clientY); }
+    constructor(clickHandler : ((Event) -> dynamic)?) {
+        canvas.onclick = clickHandler;
     }
 
     override fun lastImageSuccess() : Boolean {
@@ -138,16 +137,4 @@ class HTMLCanvasGraphics : GameGraphics {
         context.stroke();
         context.restore();
     }
-
-    //    @native("")
-    fun doclick(game : Game, x : Int, y : Int) {
-        game.gameState.handleClick(x + 0.0f, y + 0.0f);
-        game.gameRenderer.render(game);
-        var state = game.gameState as EpicPvpGameState;
-
-        if(state.player1turn) {
-            game.runAi();
-        }
-    }
-
 }
