@@ -5,6 +5,8 @@ import cja.game.pvp.EpicPvpGameState
 import cja.game.pvp.EpicPvpTurn
 import org.w3c.dom.events.MouseEvent
 import kotlin.js.Math
+import org.w3c.dom.Window
+import kotlin.browser.window
 
 class Game {
     //var gameState : GameState = CPGameState("./img", arrayOf("Geologist", "Physicist"));
@@ -35,11 +37,17 @@ class Game {
     }
 
     fun playSequence(route : List<Point>) {
-        for(pt in route) {
-            gameState.handleClick(pt.x, pt.y);
-            aiRenderer.render(gameState);
+        var routeSize = route.size
+        fun play(pt : Point){
+            console.log("Thinking for a second before doing (" + pt.x + "," + pt.y + ")");
+            window.setTimeout({
+                gameState.handleClick(pt.x, pt.y);
+                aiRenderer.render(gameState);
+                gameRenderer.render(gameState);
+                if (routeSize-- == 0) { play(pt) }
+            }, 1000)
         }
-        gameRenderer.render(gameState);
+        play(route[0])
     }
 
     fun recurseAction(state : EpicPvpGameState, pt : Point, depth : Int, route : List<Point>, choices : MutableList<Pair<Int, List<Point>>>) {
