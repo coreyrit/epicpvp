@@ -37,17 +37,19 @@ class Game {
     }
 
     fun playSequence(route : List<Point>) {
-        var routeSize = route.size
+        val routeSize = route.size
+        var index = 0
         fun play(pt : Point){
             console.log("Thinking for a second before doing (" + pt.x + "," + pt.y + ")");
             window.setTimeout({
                 gameState.handleClick(pt.x, pt.y);
                 aiRenderer.render(gameState);
                 gameRenderer.render(gameState);
-                if (routeSize-- == 0) { play(pt) }
-            }, 1000)
+                index++
+                if (index < routeSize) { play(route[index]) }
+            }, 1500)
         }
-        play(route[0])
+        play(route[index])
     }
 
     fun recurseAction(state : EpicPvpGameState, pt : Point, depth : Int, route : List<Point>, choices : MutableList<Pair<Int, List<Point>>>) {
