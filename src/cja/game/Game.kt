@@ -39,11 +39,11 @@ class Game {
         val routeSize = route.size
         var index = 0
         fun play(pt : Point){
-            console.log("Thinking for a second before doing (" + pt.x + "," + pt.y + ")");
+            console.log("Thinking for a second before doing (" + pt.x + "," + pt.y + ")")
             window.setTimeout({
-                gameState.handleClick(pt.x, pt.y);
-                aiRenderer.render(gameState);
-                gameRenderer.render(gameState);
+                gameState.handleClick(pt.x, pt.y)
+                aiRenderer.render(gameState)
+                gameRenderer.render(gameState)
                 index++
                 if (index < routeSize) { play(route[index]) }
             }, 1500)
