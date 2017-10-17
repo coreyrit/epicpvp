@@ -10,7 +10,12 @@ class Game {
     //var gameState : GameState = CPGameState("./img", arrayOf("Geologist", "Physicist"));
 
     val gameState: GameState = EpicPvpGameState("./img");
-    var gameRenderer : GameRenderer = HTMLCanvasRenderer({ev -> click((ev as MouseEvent).clientX, (ev as MouseEvent).clientY)});
+    var gameRenderer : GameRenderer = HTMLCanvasRenderer(
+            {ev -> click(
+                    Math.round((ev as MouseEvent).pageX),
+                    Math.round((ev as MouseEvent).pageY)
+            )}
+    );
 
     var aiRenderer : GameRenderer = HiddenRenderer();
 
