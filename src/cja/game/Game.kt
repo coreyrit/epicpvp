@@ -5,7 +5,6 @@ import cja.game.pvp.EpicPvpGameState
 import cja.game.pvp.EpicPvpTurn
 import org.w3c.dom.events.MouseEvent
 import kotlin.js.Math
-import org.w3c.dom.Window
 import kotlin.browser.window
 
 class Game {
