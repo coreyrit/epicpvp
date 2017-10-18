@@ -79,7 +79,7 @@ class Game {
     fun getStateScore(state : EpicPvpGameState) : Int {
         var score = 0;
 
-//        score += state.movesPlayed * 20;
+        score += state.movesPlayed * 20;
         score += state.player1life.cards.size * 100;
         score += Math.max(state.player1aggression.aggression.size, 10) * 10;
         score += state.player1hand.hand.size * 5;
