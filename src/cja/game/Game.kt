@@ -79,11 +79,36 @@ class Game {
     fun getStateScore(state : EpicPvpGameState) : Int {
         var score = 0;
 
-        score += state.movesPlayed * 20;
-        score += state.player1life.cards.size * 100;
-        score += Math.max(state.player1aggression.aggression.size, 10) * 10;
-        score += state.player1hand.hand.size * 5;
-        score += state.countMoves(true) * 20;
+        score += state.movesPlayed * 20; // it is good to play cards
+        score += state.player1life.cards.size * 100; // its best to keep life
+
+        // having aggression is good, but not too much
+        if(state.player1aggression.aggression.size < 10) {
+            score += state.player1aggression.aggression.size * 10;
+        } else {
+            score += -50;
+        }
+
+        // score big points for hurting your opponent
+        score += (10 - state.player2life.cards.size) * 100;
+
+        // the lower the opponent's aggression, the better
+        score += (20-state.player2aggression.aggression.size) * 20;
+
+        // you want SOME hands in your card, but you always want them leaving your hand
+        if(state.player1hand.hand.size < 2) {
+            score += -50;
+        } else if(state.player1hand.hand.size > 8) {
+            score += -100;
+        } else {
+            score += (8-state.player1hand.hand.size) * 20;
+        }
+
+        // the lower the opponent's and the better
+        score += (20-state.player2hand.hand.size) * 20;
+
+        score += state.countMoves(true) * 20; // is this double counting the playing of moves?
+        score += state.specialsPlayed * 10; // specials can be good
 
         return score;
     }

@@ -42,6 +42,7 @@ public class EpicPvpGameState : GameState {
     var selectedMoveCard : MoveCard? = null;
     var damageTaken : Int = 0;
     var movesPlayed : Int = 0;
+    var specialsPlayed : Int = 0;
     var aggressionDrawn : Int = 0;
     var discardedCards : MutableList<MoveCard> = ArrayList();
     var specials : MutableList<SpecialCard> = ArrayList();
@@ -106,6 +107,7 @@ public class EpicPvpGameState : GameState {
 
         state.damageTaken = damageTaken;
         state.movesPlayed = movesPlayed;
+        state.specialsPlayed = specialsPlayed;
         state.aggressionDrawn = aggressionDrawn;
 
         for(card in discardedCards) {
@@ -430,6 +432,7 @@ public class EpicPvpGameState : GameState {
                 }
 
                 movesPlayed = 0;
+                specialsPlayed = 0;
                 setTurnAction(EpicPvpTurn.PlayMove);
             }
             else if(turnAction == EpicPvpTurn.PlayMove && obj == hand) {
@@ -451,6 +454,8 @@ public class EpicPvpGameState : GameState {
                         hand.hand.remove(card);
                         discard.cards.add(card);
                         card.play(this);
+
+                        specialsPlayed++;
                     }
                     else {
 //                        println("What kind of card is THIS?? (" + ptx + "," + pty + ")");
