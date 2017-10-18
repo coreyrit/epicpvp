@@ -8,4 +8,9 @@ public class EpicPvpButton : GameButton {
     constructor(card : EpicPvpCard, label : String) : super(label) {
         this.card = card;
     }
+
+    constructor(card : EpicPvpCard, label : String, fill : Boolean) : super(label) {
+        this.card = card;
+        this.fill = fill;
+    }
 }

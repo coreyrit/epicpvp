@@ -293,6 +293,13 @@ public class EpicPvpGameState : GameState {
         gameObjects.add(0, button2);
     }
 
+    fun placeButtons(message : GameMessage, button2 : GameButton, width : Float) {
+        message.setPosition(moveArea.x + moveArea.width/2 - width - 5f, moveArea.y + moveArea.height/2 - 70f, width*2 + 10f, 40f);
+        gameObjects.add(0, message);
+        button2.setPosition(moveArea.x + moveArea.width/2 + 5f, moveArea.y + moveArea.height/2 - 20f, width, 40f);
+        gameObjects.add(0, button2);
+    }
+
     fun dealDamage(player : Boolean) {
         var life = getPlayerLife(player);
         if(life.cards.size > 0) {
@@ -313,7 +320,7 @@ public class EpicPvpGameState : GameState {
                 msg = "Player 1";
             }
 
-            var endGame = GameMessage("   " + msg + " wins!", true);
+            var endGame = GameMessage(msg + " wins!", true);
             endGame.setPosition(moveArea.x + moveArea.width / 2 - 100f - 5f, moveArea.y + moveArea.height / 2 - 70f, 100f * 2 + 10f, 40f);
             gameObjects.add(0, endGame);
 
@@ -430,7 +437,7 @@ public class EpicPvpGameState : GameState {
                     aggressionDrawn = count;
                     while(count > 0) {
                         var draw = aggression.aggression.removeAt(0);
-                        draw.isFront = true;
+                        draw.isFront = !player1turn;
                         hand.hand.add(draw);
                         count--;
                     }
@@ -459,6 +466,7 @@ public class EpicPvpGameState : GameState {
                 }
                 else if(card != null && card.highlight) {
                     if(card is MoveCard) {
+                        card.isFront = true;
 //                        println("play move (" + ptx + "," + pty + ")");
                         setTurnAction(EpicPvpTurn.AssignMove);
                         selectedMoveCard = card;

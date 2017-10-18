@@ -1,25 +1,31 @@
 package cja.game.pvp.human
 
-import cja.game.GameButton
 import cja.game.GameGraphics
-import cja.game.GameMessage
 import cja.game.pvp.*
 
 public class HumanRace : RaceCard, CardProcess, ButtonsCard {
-    var message : GameMessage = GameMessage("Human Ability", true);
-    var button1 : EpicPvpButton = EpicPvpButton(this, "Use Insight");
+    var button1 : EpicPvpButton = EpicPvpButton(this, "", false);
     var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT use Insight");
     var discarding : Boolean = false;
     var discarded : Int = 0;
     var insight : Int = 3;
+    var player : Boolean;
 
     constructor(owner : Boolean) : super(owner, "Human", 5, 2) {
         this.text = "Setup: Put three Insight counters on this card.  Before playing moves: Once per turn, you may remove an Insight counter " +
                 "from this card.  If you do, discard any number of cards from your hand, then draw that many cards.";
+        this.player = owner;
     }
 
     override fun startProcess(state : EpicPvpGameState) {
-        state.placeButtons(message, button1, button2, 200f);
+        button1.setPosition(this.x, this.y, this.width, this.height);
+        state.gameObjects.add(0, button1);
+        if(player) {
+            button2.setPosition(state.player1area.playerHand.x, state.player1area.playerHand.y, state.player1area.playerHand.width, state.player1area.playerHand.height);
+        } else {
+            button2.setPosition(state.player2area.playerHand.x, state.player2area.playerHand.y, state.player2area.playerHand.width, state.player2area.playerHand.height);
+        }
+        state.gameObjects.add(0, button2);
     }
 
     override fun handleClick(state : EpicPvpGameState, ptx: Float, pty: Float): Boolean {
@@ -27,7 +33,6 @@ public class HumanRace : RaceCard, CardProcess, ButtonsCard {
 
         if(obj == button1) {
             discarding = true;
-            state.gameObjects.remove(message);
             state.gameObjects.remove(button1);
             state.gameObjects.remove(button2);
             insight--;
@@ -55,7 +60,6 @@ public class HumanRace : RaceCard, CardProcess, ButtonsCard {
         }
 
         state.getCardProcesses(this.owner).remove(this);
-        state.gameObjects.remove(message);
         state.gameObjects.remove(button1);
         state.gameObjects.remove(button2);
         state.handleClick(-1f, -1f);

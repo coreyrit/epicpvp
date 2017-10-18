@@ -32,15 +32,18 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
             }
             endAction(state);
         } else if(obj == button2) {
-            choosing = true;
-            for(card in state.getPlayerHand(!this.owner).hand) {
-                chooseCard.hand.add(card);
-            }
-            if(chooseCard.hand.size == 0) {
-                endAction(state);
-            } else {
-                chooseCard.setPosition(state.moveArea.x+50f, state.moveArea.y-75f, state.moveArea.width-100f, state.moveArea.height+150f);
-                state.gameObjects.add(0, chooseCard);
+            // do this twice
+            for (i in 1..2) {
+                choosing = true;
+                for (card in state.getPlayerHand(!this.owner).hand) {
+                    chooseCard.hand.add(card);
+                }
+                if (chooseCard.hand.size == 0) {
+                    endAction(state);
+                } else {
+                    chooseCard.setPosition(state.moveArea.x + 50f, state.moveArea.y - 75f, state.moveArea.width - 100f, state.moveArea.height + 150f);
+                    state.gameObjects.add(0, chooseCard);
+                }
             }
         } else if(choosing && obj == chooseCard) {
             var card = chooseCard.getCardAt(ptx, pty) as EpicPvpCard?;

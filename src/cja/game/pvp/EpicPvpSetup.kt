@@ -221,7 +221,7 @@ public class EpicPvpSetup {
         // draw player hands
         for(i in 1..5) {
             var card1 = state.player1deck.pop();
-            card1.isFront = true;
+            card1.isFront = false;
             state.player1hand.hand.add(card1);
             var card2 = state.player2deck.pop();
             card2.isFront = true;
