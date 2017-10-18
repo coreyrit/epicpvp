@@ -367,6 +367,11 @@ public class EpicPvpGameState : GameState {
             damageTaken = 0;
             player1turn = !player;
             setTurnAction(EpicPvpTurn.DrawAggression);
+
+            // rotate cards
+            for(card in moveArea.moves.keys) {
+                card.isRotated = player1turn;
+            }
         }
     }
 
@@ -424,7 +429,7 @@ public class EpicPvpGameState : GameState {
                     move.afterDrawPhase(this);
                 }
 
-                // before move phaes
+                // before move phase
                 getPlayerRace(player1turn).beforeMovePhase(this);
                 getPlayerClass(player1turn).beforeMovePhase(this);
                 for(permanent in getPlayerPermanents(player1turn)) {
@@ -531,8 +536,7 @@ public class EpicPvpGameState : GameState {
                     // card was blocked
                     var defend = moveArea.moves.get(card);
                     discardMove(card, defend);
-                    defend!!.isRotated = !defend.isRotated;
-                    defend.delta = defend.defend - card.attack;
+                    defend!!.delta = defend!!.defend - card.attack;
                     moveArea.assignMove(defend, null);
                 }
             }
