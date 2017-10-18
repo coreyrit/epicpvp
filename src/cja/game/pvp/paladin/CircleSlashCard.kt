@@ -6,7 +6,7 @@ import cja.game.pvp.MoveCard
 
 public class CircleSlashCard : MoveCard {
 
-    constructor(img : String) : super("Circle Slash", 9, 8, 0) {
+    constructor() : super("Circle Slash", 9, 8, 0) {
         this.text = "After playing moves: Block up to 9 attack worth of enemy attack.";
     }
 
@@ -68,6 +68,6 @@ public class CircleSlashCard : MoveCard {
     }
 
     override fun create() : EpicPvpCard {
-        return CircleSlashCard("");
+        return CircleSlashCard();
     }
 }

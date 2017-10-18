@@ -12,7 +12,7 @@ public class HammerSmashCard : MoveCard, CardProcess, ButtonsCard {
     var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT discard");
     var choosing : Boolean = false;
 
-    constructor(img : String) : super("Hammer Smash", 4, 4, 4) {
+    constructor() : super("Hammer Smash", 4, 4, 4) {
         this.text = "After blocking: If this attack was blocked, you may discard one permanent in play.";
     }
 
@@ -79,7 +79,7 @@ public class HammerSmashCard : MoveCard, CardProcess, ButtonsCard {
     }
 
     override fun create(): EpicPvpCard {
-        return HammerSmashCard("");
+        return HammerSmashCard();
     }
 
     override fun clonePropertiesTo(card: EpicPvpCard) {

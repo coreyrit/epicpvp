@@ -10,7 +10,7 @@ public class BlessedBladeCard : MoveCard, CardProcess, ButtonsCard {
     var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT discard");
     var discarding : Boolean = false;
 
-    constructor(img : String) : super("Blessed Blade", 1, 1, 1) {
+    constructor() : super("Blessed Blade", 1, 1, 1) {
         this.text = "After playing moves: You may discard this move from play to give one of your other moves a +1 attack, a +1 defense, and a +1 damage counter.";
     }
 
@@ -83,7 +83,7 @@ public class BlessedBladeCard : MoveCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return BlessedBladeCard("");
+        return BlessedBladeCard();
     }
 
     override fun clonePropertiesTo(card: EpicPvpCard) {

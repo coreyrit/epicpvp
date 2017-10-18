@@ -7,7 +7,7 @@ import cja.game.pvp.SpecialCard
 
 public class PowerStrikeCard : SpecialCard, CardProcess {
 
-    constructor(pth : String) : super("Power Strike") {
+    constructor() : super("Power Strike") {
         this.text = "After playing moves: One of your move gains two +1 attack and two +1 defense counters.";
     }
 
@@ -49,6 +49,6 @@ public class PowerStrikeCard : SpecialCard, CardProcess {
     }
 
     override fun create() : EpicPvpCard {
-        return PowerStrikeCard("");
+        return PowerStrikeCard();
     }
 }

@@ -9,7 +9,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
     var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT discard");
     var choosing : Boolean = false;
 
-    constructor(pth : String) : super("Shadow Cloak") {
+    constructor() : super("Shadow Cloak") {
         this.text = "Before playing moves: Put in play as a permanent.  " +
                 "Before playing moves: You may discard three cards from your deck to remove the text from any move.";
     }
@@ -91,7 +91,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-//        state.discardedCards.remove(this);
+        state.discardedCards.remove(this);
         state.specials.remove(this);
         if(state.movesPlayed == 0) {
             // no moves played, can take advantage of special now
@@ -105,7 +105,7 @@ public class ShadowCloakCard : SpecialCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return ShadowCloakCard("");
+        return ShadowCloakCard();
     }
 
     override fun clonePropertiesTo(card: EpicPvpCard) {

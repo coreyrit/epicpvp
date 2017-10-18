@@ -71,7 +71,7 @@ class CPGameState : GameState {
         maxCards = when(numPlayers) {
             2 -> 6;
             3 -> 4;
-            3 -> 3;
+            4 -> 3;
             else -> 0;
         }
 

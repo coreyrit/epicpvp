@@ -6,7 +6,7 @@ import cja.game.GameObject
 public class MoveArea : GameObject {
     var moves : MutableMap<MoveCard, MoveCard?> = LinkedHashMap();
 
-    constructor(color : String) {
+    constructor() {
 
     }
 
@@ -51,7 +51,7 @@ public class MoveArea : GameObject {
     }
 
     fun clone(state : EpicPvpGameState) : MoveArea {
-        var moveArea = MoveArea("black");
+        var moveArea = MoveArea();
         moveArea.highlight = highlight;
         moveArea.x = x;
         moveArea.y = y;

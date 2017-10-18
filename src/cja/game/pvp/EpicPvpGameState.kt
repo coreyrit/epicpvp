@@ -32,7 +32,7 @@ public class EpicPvpGameState : GameState {
     var player2permanents : MutableList<EpicPvpCard> = player2area.playerPermanents;
     var player2cardProcesses : MutableList<CardProcess> = ArrayList();
 
-    var moveArea : MoveArea = MoveArea("black");
+    var moveArea : MoveArea = MoveArea();
 
     var player1turn : Boolean = true;
     var turnAction : EpicPvpTurn = EpicPvpTurn.DrawAggression;
@@ -44,16 +44,16 @@ public class EpicPvpGameState : GameState {
     var movesPlayed : Int = 0;
     var specialsPlayed : Int = 0;
     var aggressionDrawn : Int = 0;
-    var discardedCards : MutableList<MoveCard> = ArrayList();
+    var discardedCards : MutableList<EpicPvpCard> = ArrayList();
     var specials : MutableList<SpecialCard> = ArrayList();
 
-    constructor(pth : String) {
+    constructor() {
         this.width = 1200f;
         this.height = 800f;
     }
 
     fun clone() : EpicPvpGameState {
-        var state = EpicPvpGameState("");
+        var state = EpicPvpGameState();
 
         state.player1area = player1area.clone(state);
         state.player1race = state.player1area.playerRace;
@@ -536,7 +536,7 @@ public class EpicPvpGameState : GameState {
                     // card was blocked
                     var defend = moveArea.moves.get(card);
                     discardMove(card, defend);
-                    defend!!.delta = defend!!.defend - card.attack;
+                    defend!!.delta = defend.defend - card.attack;
                     moveArea.assignMove(defend, null);
                 }
             }

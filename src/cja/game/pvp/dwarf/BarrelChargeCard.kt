@@ -11,7 +11,7 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
     var button2 : EpicPvpButton = EpicPvpButton(this, "Discard 2 cards");
     var choosing : Boolean = false;
 
-    constructor(img : String) : super("Barrel Charge") {
+    constructor() : super("Barrel Charge") {
         this.text = "After playing moves: Your enemy chooses - Each of your moves gains two +1 attack counters or they discard two cards.";
     }
 
@@ -80,7 +80,7 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
     }
 
     override fun create(): EpicPvpCard {
-        return BarrelChargeCard("");
+        return BarrelChargeCard();
     }
 
     override fun clonePropertiesTo(card: EpicPvpCard) {

@@ -85,7 +85,7 @@ class LoopIncGameState : GameState {
         scoreBoard.setPosition(x, y, 250f, 100f);
         gameObjects.add(scoreBoard);
 
-        x = 50f;
+//        x = 50f;
         y += 110f; // height of board + 10
 
         for(i in 1..numPlayers) {

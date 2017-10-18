@@ -229,7 +229,7 @@ class YearMat : GameMat {
         return false;
     }
 
-    fun repairSquare(number : Int, deck : GameDeck) {
+    fun repairSquare(number : Int) {
         for(i in 0..squares[number-1].size-1) {
             if(squares[number-1][i] is DamageGem) {
                 //deck.cards.add((squares[number-1] as MutableList).remove(i));

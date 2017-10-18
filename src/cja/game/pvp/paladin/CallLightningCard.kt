@@ -49,7 +49,7 @@ public class CallLightningCard : SpecialCard, CardProcess, ButtonsCard {
         button2.highlight = true;
     }
 
-    constructor(pth : String) : super("Call Lightning") {
+    constructor() : super("Call Lightning") {
         this.text = "After playing moves: Your enemy chooses - They take 1 damage or discard two cards from their aggression pile.";
     }
 
@@ -58,7 +58,7 @@ public class CallLightningCard : SpecialCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return CallLightningCard("");
+        return CallLightningCard();
     }
 
     override fun getButton(label: String): EpicPvpButton {

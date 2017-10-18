@@ -13,14 +13,14 @@ public class MurderOfCrowsCard : SpecialCard, CardProcess, ButtonsCard {
     var button2 : EpicPvpButton = EpicPvpButton(this, "Draw non-move from discard");
     var choosing : Boolean = false;
 
-    constructor(pth : String) : super("Murder of Crows") {
+    constructor() : super("Murder of Crows") {
         this.text = "Before playing moves: Choose - Take control of an enemy's permanent or add a non-move card from your discard pile to your hand.";
     }
 
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-//        state.discardedCards.remove(this);
+        state.discardedCards.remove(this);
     }
 
     override fun startProcess(state : EpicPvpGameState) {
@@ -96,7 +96,7 @@ public class MurderOfCrowsCard : SpecialCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return MurderOfCrowsCard("");
+        return MurderOfCrowsCard();
     }
 
     override fun clonePropertiesTo(card: EpicPvpCard) {

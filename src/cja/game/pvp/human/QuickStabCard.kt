@@ -6,7 +6,7 @@ import cja.game.pvp.MoveCard
 
 public class QuickStabCard : MoveCard {
 
-    constructor(img : String) : super("Quick Stab", 1, 1, 2) {
+    constructor() : super("Quick Stab", 1, 1, 2) {
         this.text = "End phase: If this attack was blocked, and your enemy took damage from another attack, your enemy takes 1 damage.";
     }
 
@@ -19,6 +19,6 @@ public class QuickStabCard : MoveCard {
     }
 
     override fun create() : EpicPvpCard {
-        return QuickStabCard("");
+        return QuickStabCard();
     }
 }

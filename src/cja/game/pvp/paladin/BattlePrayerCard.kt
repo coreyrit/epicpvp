@@ -6,7 +6,7 @@ import cja.game.pvp.SpecialCard
 
 public class BattlePrayerCard : SpecialCard {
 
-    constructor(pth : String) : super("Battle Prayer") {
+    constructor() : super("Battle Prayer") {
         this.text = "After you block: If one of your blocks is at least three higher than the attack its blocking, gain 1 life and draw a card.";
     }
 
@@ -22,6 +22,6 @@ public class BattlePrayerCard : SpecialCard {
     }
 
     override fun create() : EpicPvpCard {
-        return BattlePrayerCard("");
+        return BattlePrayerCard();
     }
 }

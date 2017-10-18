@@ -9,7 +9,7 @@ public class WolfSpiritCard : MoveCard, CardProcess, ButtonsCard {
     var button1 : EpicPvpButton = EpicPvpButton(this, "Choose 1");
     var button2 : EpicPvpButton = EpicPvpButton(this, "Choose 2");
 
-    constructor(img : String) : super("Wolf Spirit", 5, 5, 5) {
+    constructor() : super("Wolf Spirit", 5, 5, 5) {
         this.text = "End phase: If this move damaged your enemy, choose - 1 or 2.  Add all moves with the printed cost in your discard pile to your hand.";
     }
 
@@ -64,7 +64,7 @@ public class WolfSpiritCard : MoveCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return WolfSpiritCard("");
+        return WolfSpiritCard();
     }
 
     override fun getButton(label: String): EpicPvpButton {

@@ -10,8 +10,8 @@ public class EpicPvpSetup {
 
     fun druidDeck() : List<EpicPvpCard> {
         var deck = ArrayList<EpicPvpCard>();
-        deck.add(MurderOfCrowsCard(""));
-        deck.add(BarkskinCard(""));
+        deck.add(MurderOfCrowsCard());
+        deck.add(BarkskinCard());
         for(i in 1..3) {
             deck.add(BasicStrikeCard(3, 3, 3));
         }
@@ -22,7 +22,7 @@ public class EpicPvpSetup {
             deck.add(BasicStrikeCard(7, 7, 7));
         }
         for(i in 1..3) {
-            deck.add(CallOfTheWildCard(""));
+            deck.add(CallOfTheWildCard());
         }
         for(i in 1..3) {
             deck.add(TanglevinesCard(2, 2, 2));
@@ -31,15 +31,15 @@ public class EpicPvpSetup {
             deck.add(TanglevinesCard(6, 6, 6));
         }
         for(i in 1..2) {
-            deck.add(WolfSpiritCard(""));
+            deck.add(WolfSpiritCard());
         }
         return deck;
     }
 
     fun goblinDeck() : List<EpicPvpCard> {
         var deck = ArrayList<EpicPvpCard>();
-        deck.add(ShadowCloakCard(""));
-        deck.add(SkitterAwayCard(""));
+        deck.add(ShadowCloakCard());
+        deck.add(SkitterAwayCard());
         for(i in 1..3) {
             deck.add(BasicStrikeCard(3, 3, 3));
         }
@@ -47,10 +47,10 @@ public class EpicPvpSetup {
             deck.add(BasicStrikeCard(5, 5, 5));
         }
         for(i in 1..4) {
-            deck.add(ThrowingDaggerCard(""));
+            deck.add(ThrowingDaggerCard());
         }
         for(i in 1..3) {
-            deck.add(GoForTheKneesCard(""));
+            deck.add(GoForTheKneesCard());
         }
         for(i in 1..3) {
             deck.add(GleefulSlashCard(4, 3, 4));
@@ -63,8 +63,8 @@ public class EpicPvpSetup {
 
     fun humanDeck() : List<EpicPvpCard> {
         var deck = ArrayList<EpicPvpCard>();
-        deck.add(PowerStrikeCard(""));
-        deck.add(PainIsMyTeacherCard(""));
+        deck.add(PowerStrikeCard());
+        deck.add(PainIsMyTeacherCard());
         for(i in 1..3) {
             deck.add(BasicStrikeCard(3, 3, 3));
         }
@@ -76,7 +76,7 @@ public class EpicPvpSetup {
         }
         deck.add(BasicStrikeCard(8, 8, 8));
         for(i in 1..3) {
-            deck.add(QuickStabCard(""));
+            deck.add(QuickStabCard());
         }
         for(i in 1..2) {
             deck.add(ViciousElbowCard(2, 2, 2));
@@ -85,15 +85,15 @@ public class EpicPvpSetup {
             deck.add(ViciousElbowCard(4, 4, 4));
         }
         for(i in 1..2) {
-            deck.add(MirrorStrikeCard(""));
+            deck.add(MirrorStrikeCard());
         }
         return deck;
     }
 
     fun paladinDeck() : List<EpicPvpCard> {
         var deck = ArrayList<EpicPvpCard>();
-        deck.add(BattlePrayerCard(""));
-        deck.add(CallLightningCard(""));
+        deck.add(BattlePrayerCard());
+        deck.add(CallLightningCard());
         for(i in 1..3) {
             deck.add(BasicStrikeCard(2, 2, 2));
         }
@@ -106,7 +106,7 @@ public class EpicPvpSetup {
         deck.add(BasicStrikeCard(7, 7, 7));
         deck.add(BasicStrikeCard(8, 8, 8));
         for(i in 1..3) {
-            deck.add(BlessedBladeCard(""));
+            deck.add(BlessedBladeCard());
         }
         for(i in 1..3) {
             deck.add(HolyStrikeCard(3, 3, 3));
@@ -114,14 +114,14 @@ public class EpicPvpSetup {
         for(i in 1..2) {
             deck.add(HolyStrikeCard(5, 5, 5));
         }
-        deck.add(CircleSlashCard(""));
+        deck.add(CircleSlashCard());
         return deck;
     }
 
     fun dwarfDeck() : List<EpicPvpCard> {
         var deck = ArrayList<EpicPvpCard>();
-        deck.add(BarrelChargeCard(""));
-        deck.add(DwarvenHeightCard(""));
+        deck.add(BarrelChargeCard());
+        deck.add(DwarvenHeightCard());
         for(i in 1..4) {
             deck.add(BasicStrikeCard(3, 3, 3));
         }
@@ -131,10 +131,10 @@ public class EpicPvpSetup {
         deck.add(BasicStrikeCard(8, 8, 8));
         deck.add(BasicStrikeCard(9, 9, 9));
         for(i in 1..2) {
-            deck.add(AncientGrudgeCard(""));
+            deck.add(AncientGrudgeCard());
         }
         for(i in 1..3) {
-            deck.add(HammerSmashCard(""));
+            deck.add(HammerSmashCard());
         }
         for(i in 1..3) {
             deck.add(ToughCard(2, 2, 5))
@@ -173,7 +173,7 @@ public class EpicPvpSetup {
         state.player1race.id = id++;
         state.player1class.id = id++;
         state.player2race.id = id++;
-        state.player2class.id = id++;
+        state.player2class.id = id;
         state.allCards.put(state.player1race.id, state.player1race);
         state.allCards.put(state.player1class.id, state.player1class);
         state.allCards.put(state.player2race.id, state.player2race);

@@ -49,7 +49,7 @@ public class DwarfRace : RaceCard, CardProcess, ButtonsCard {
 
     override fun afterEndPhase(state : EpicPvpGameState) {
         for(card in state.discardedCards) {
-            if(card.blockedBy == null && card is BasicStrikeCard) {
+            if(card is BasicStrikeCard && card.blockedBy == null) {
                 state.getCardProcesses(this.owner).add(this);
             }
         }

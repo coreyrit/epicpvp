@@ -5,7 +5,7 @@ import cja.game.pvp.MoveCard
 
 public class ThrowingDaggerCard : MoveCard {
 
-    constructor(img : String) : super("Throwing Dagger", 1, 1, 1) {
+    constructor() : super("Throwing Dagger", 1, 1, 1) {
         this.text = "Assign blocks: Your enemy cannot assign moves with a printed cost of 4 or higher to block this attack.";
     }
 
@@ -14,6 +14,6 @@ public class ThrowingDaggerCard : MoveCard {
     }
 
     override fun create() : EpicPvpCard {
-        return ThrowingDaggerCard("");
+        return ThrowingDaggerCard();
     }
 }

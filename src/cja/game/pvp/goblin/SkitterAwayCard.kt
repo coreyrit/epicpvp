@@ -6,7 +6,7 @@ import cja.game.pvp.SpecialCard
 
 public class SkitterAwayCard : SpecialCard {
 
-    constructor(pth : String) : super("Skitter Away") {
+    constructor() : super("Skitter Away") {
         this.text = "After playing moves: If you only played one move this turn, block all enemy attacks.";
     }
 
@@ -21,6 +21,6 @@ public class SkitterAwayCard : SpecialCard {
     }
 
     override fun create() : EpicPvpCard {
-        return SkitterAwayCard("");
+        return SkitterAwayCard();
     }
 }

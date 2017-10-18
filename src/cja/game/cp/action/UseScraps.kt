@@ -18,7 +18,7 @@ class UseScraps : GameAction {
     override fun execute(): Boolean {
         var myMat = gs.getPawnMat(gs.pawns[gs.playerTurn]);
         var pawnNumber = myMat!!.getPawnNumber(gs.pawns[gs.playerTurn]);
-        myMat.repairSquare(pawnNumber, gs.damageDiscard);
+        myMat.repairSquare(pawnNumber);
         var rc = railDeck.pop() as RailCard;
         rc.isFront = true;
         myMat.setCardSquare(pawnNumber, rc);

@@ -50,7 +50,7 @@ public class GoblinRace : RaceCard, CardProcess, ButtonsCard {
 
     override fun afterEndPhase(state : EpicPvpGameState) {
         for(card in state.discardedCards) {
-            if(card.blockedBy != null && card.blockedBy is MoveCard && card.blockedBy!!.cost == card.cost) {
+            if(card is MoveCard && card.blockedBy != null && card.blockedBy is MoveCard && card.blockedBy!!.cost == card.cost) {
                 state.getCardProcesses(this.owner).add(this);
             }
         }

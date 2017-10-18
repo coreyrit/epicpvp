@@ -3,14 +3,14 @@ package cja.game.pvp.dwarf
 import cja.game.pvp.*
 
 public class DwarvenHeightCard : SpecialCard {
-    constructor(img : String) : super("Dwarven Height") {
+    constructor() : super("Dwarven Height") {
         this.text = "Before playing moves: Put in play as a permanent.  After playing moves: All of your Basic Strikes gain a +1 defense counter.";
     }
 
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-//        state.discardedCards.remove(this);
+        state.discardedCards.remove(this);
         state.specials.remove(this);
     }
 
@@ -25,6 +25,6 @@ public class DwarvenHeightCard : SpecialCard {
     }
 
     override fun create(): EpicPvpCard {
-        return DwarvenHeightCard("");
+        return DwarvenHeightCard();
     }
 }

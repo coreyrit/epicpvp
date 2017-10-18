@@ -10,6 +10,6 @@ public class ToughCard : MoveCard {
     }
 
     override fun create(): EpicPvpCard {
-        return AncientGrudgeCard("");
+        return AncientGrudgeCard();
     }
 }

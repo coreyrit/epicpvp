@@ -5,7 +5,7 @@ import cja.game.pvp.EpicPvpGameState
 import cja.game.pvp.MoveCard
 
 public class AncientGrudgeCard : MoveCard {
-    constructor(img : String) : super("Ancient Grudge", 1, 1, 1) {
+    constructor() : super("Ancient Grudge", 1, 1, 1) {
         this.text = "After playing moves: If your enemy is a Goblin or an Orc this move gains a +1 damage counter.";
     }
 
@@ -16,6 +16,6 @@ public class AncientGrudgeCard : MoveCard {
     }
 
     override fun create(): EpicPvpCard {
-        return AncientGrudgeCard("");
+        return AncientGrudgeCard();
     }
 }

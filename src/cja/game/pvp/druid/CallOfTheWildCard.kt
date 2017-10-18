@@ -6,7 +6,7 @@ import cja.game.pvp.MoveCard
 
 public class CallOfTheWildCard : MoveCard {
 
-    constructor(img : String) : super("Call of the Wild", 1, 1, 1) {
+    constructor() : super("Call of the Wild", 1, 1, 1) {
         this.text = "After draw phase: This move gains a +1 attack counter for each card your enemy drew from their aggression pile.";
     }
 
@@ -15,6 +15,6 @@ public class CallOfTheWildCard : MoveCard {
     }
 
     override fun create() : EpicPvpCard {
-        return CallOfTheWildCard("");
+        return CallOfTheWildCard();
     }
 }

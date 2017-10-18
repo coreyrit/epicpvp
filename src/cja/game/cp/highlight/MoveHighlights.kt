@@ -16,7 +16,7 @@ class MoveHighlights : Highlights {
 
     override fun highlight() {
         gs.pawns[gs.playerTurn].highlight = true;
-        var moves = gs.allowedMovement[pawnNumber];
+//        var moves = gs.allowedMovement[pawnNumber];
 //        for(num in moves) {
 //            if(!myMat.isBlocked(num)) {
 //                myMat.highlightSquare(num);

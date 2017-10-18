@@ -7,7 +7,7 @@ import cja.game.pvp.MoveCard
 
 public class MirrorStrikeCard : MoveCard, CardProcess {
 
-    constructor(img : String) : super("Mirror Strike", 5, 5, 5) {
+    constructor() : super("Mirror Strike", 5, 5, 5) {
         this.text = "After playing moves: This move gains the current text of any of your other moves in play.  This move can not become a permanent.";
     }
 
@@ -66,6 +66,6 @@ public class MirrorStrikeCard : MoveCard, CardProcess {
     }
 
     override fun create() : EpicPvpCard {
-        return MirrorStrikeCard("");
+        return MirrorStrikeCard();
     }
 }

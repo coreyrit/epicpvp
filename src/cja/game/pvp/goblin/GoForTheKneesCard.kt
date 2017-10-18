@@ -11,7 +11,7 @@ public class GoForTheKneesCard : MoveCard, CardProcess, ButtonsCard {
     var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT discard");
     var choosing : Boolean = false;
 
-    constructor(img : String) : super("Go for the Knees", 2, 2, 2) {
+    constructor() : super("Go for the Knees", 2, 2, 2) {
         this.text = "After blocking: If this attack was blocked put in play as permanent.  " +
                 "After playing moves: Once per turn, you may discard a card from your deck to give one of your moves a +1 defense counter.";
     }

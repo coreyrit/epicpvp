@@ -8,7 +8,7 @@ public class PainIsMyTeacherCard : SpecialCard, CardProcess, ButtonsCard {
     var button1 : EpicPvpButton = EpicPvpButton(this, "Draw a card");
     var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT draw a card");
 
-    constructor(pth : String) : super("Pain Teaches Me") {
+    constructor() : super("Pain Teaches Me") {
         this.text = "Before playing moves: Put in play as a permanent.  After you take damage: You may draw a card.";
     }
 
@@ -50,7 +50,7 @@ public class PainIsMyTeacherCard : SpecialCard, CardProcess, ButtonsCard {
     override fun play(state : EpicPvpGameState) {
         state.getPlayerPermanents(this.owner).add(this);
         state.getPlayerDiscard(this.owner).cards.remove(this);
-//        state.discardedCards.remove(this);
+        state.discardedCards.remove(this);
         state.specials.remove(this);
     }
 
@@ -61,7 +61,7 @@ public class PainIsMyTeacherCard : SpecialCard, CardProcess, ButtonsCard {
     }
 
     override fun create() : EpicPvpCard {
-        return PainIsMyTeacherCard("");
+        return PainIsMyTeacherCard();
     }
 
     override fun getButton(label: String): EpicPvpButton {

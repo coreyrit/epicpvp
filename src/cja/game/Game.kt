@@ -10,11 +10,11 @@ import kotlin.browser.window
 class Game {
     //var gameState : GameState = CPGameState("./img", arrayOf("Geologist", "Physicist"));
 
-    val gameState: GameState = EpicPvpGameState("./img");
+    val gameState: GameState = EpicPvpGameState();
     var gameRenderer : GameRenderer = HTMLCanvasRenderer(
             {ev -> click(
                     Math.round((ev as MouseEvent).pageX),
-                    Math.round((ev as MouseEvent).pageY)
+                    Math.round(ev.pageY)
             )}
     );
 

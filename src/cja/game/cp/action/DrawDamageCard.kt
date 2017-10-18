@@ -22,7 +22,7 @@ class DrawDamageCard : GameAction {
                 4, 5, 6 -> gs.yearMats[1].damageColumn(gs.damageGems[gs.lastDrawBuildCard!!.damageColumn - 1], gs.lastDrawBuildCard!!.damageColumn - 3);
                 7, 8, 9 -> gs.yearMats[2].damageColumn(gs.damageGems[gs.lastDrawBuildCard!!.damageColumn - 1], gs.lastDrawBuildCard!!.damageColumn - 6);
                 10, 11, 12 -> gs.yearMats[3].damageColumn(gs.damageGems[gs.lastDrawBuildCard!!.damageColumn - 1], gs.lastDrawBuildCard!!.damageColumn - 9);
-                else -> false;
+//                else -> false;
             }
         }
 //        ) {
