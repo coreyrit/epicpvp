@@ -305,6 +305,18 @@ public class EpicPvpGameState : GameState {
         if(life.cards.size == 0) {
             // GAME OVER
             clearHighlights();
+
+            val msg : String;
+            if(player) {
+                msg = "Player 2";
+            } else {
+                msg = "Player 1";
+            }
+
+            var endGame = GameMessage("   " + msg + " wins!", true);
+            endGame.setPosition(moveArea.x + moveArea.width / 2 - 100f - 5f, moveArea.y + moveArea.height / 2 - 70f, 100f * 2 + 10f, 40f);
+            gameObjects.add(0, endGame);
+
             setTurnAction(EpicPvpTurn.GameOver);
         }
     }
