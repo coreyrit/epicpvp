@@ -128,7 +128,9 @@ class Game {
             }
         }
         printSequence(max, route);
-        playSequence(route);
+        if(max > -10000) {
+            playSequence(route);
+        }
 //        println("----------------------------------------------------------------");
     }
 
