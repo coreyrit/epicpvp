@@ -285,19 +285,22 @@ public class EpicPvpGameState : GameState {
     }
 
     fun placeButtons(message : GameMessage, button1 : GameButton, button2 : GameButton, width : Float) {
-        message.setPosition(moveArea.x + moveArea.width/2 - width - 5f, moveArea.y + moveArea.height/2 - 70f, width*2 + 10f, 40f);
-        gameObjects.add(0, message);
-        button1.setPosition(moveArea.x + moveArea.width/2 - width - 5f, moveArea.y + moveArea.height/2 - 20f, width, 40f);
-        gameObjects.add(0, button1);
+        placeMessage(message, width)
+        button1.setPosition(moveArea.x + moveArea.width/2 - width - 5f, moveArea.y + moveArea.height/2 - 20f, width, 40f)
+        gameObjects.add(0, button1)
+        button2.setPosition(moveArea.x + moveArea.width/2 + 5f, moveArea.y + moveArea.height/2 - 20f, width, 40f)
+        gameObjects.add(0, button2)
+    }
+
+    fun placeButtons(message : GameMessage, button2 : GameButton, width : Float) {
+        placeMessage(message, width)
         button2.setPosition(moveArea.x + moveArea.width/2 + 5f, moveArea.y + moveArea.height/2 - 20f, width, 40f);
         gameObjects.add(0, button2);
     }
 
-    fun placeButtons(message : GameMessage, button2 : GameButton, width : Float) {
-        message.setPosition(moveArea.x + moveArea.width/2 - width - 5f, moveArea.y + moveArea.height/2 - 70f, width*2 + 10f, 40f);
-        gameObjects.add(0, message);
-        button2.setPosition(moveArea.x + moveArea.width/2 + 5f, moveArea.y + moveArea.height/2 - 20f, width, 40f);
-        gameObjects.add(0, button2);
+    fun placeMessage(message : GameMessage, width : Float) {
+        message.setPosition(moveArea.x + moveArea.width/2 - width - 5f, moveArea.y + moveArea.height/2 - 70f, width*2 + 10f, 40f)
+        gameObjects.add(0, message)
     }
 
     fun dealDamage(player : Boolean) {
@@ -321,9 +324,7 @@ public class EpicPvpGameState : GameState {
             }
 
             var endGame = GameMessage(msg + " wins!", true);
-            endGame.setPosition(moveArea.x + moveArea.width / 2 - 100f - 5f, moveArea.y + moveArea.height / 2 - 70f, 100f * 2 + 10f, 40f);
-            gameObjects.add(0, endGame);
-
+            placeMessage(endGame, 100f)
             setTurnAction(EpicPvpTurn.GameOver);
         }
     }
@@ -349,9 +350,7 @@ public class EpicPvpGameState : GameState {
     }
 
     fun setTurnAction(action : EpicPvpTurn) {
-        if(turnAction != EpicPvpTurn.GameOver) {
-            turnAction = action;
-        }
+        turnAction = action;
     }
 
     fun discardMove(card : MoveCard, blocker : EpicPvpCard?) {
@@ -561,24 +560,28 @@ public class EpicPvpGameState : GameState {
                 }
             }
 
-            // activate any end phase actions against discaded cards
-            for(card in discardedCards) {
-                card.afterEndPhase(this);
-            }
-            for(special in specials) {
-                special.afterEndPhase(this);
-            }
-            for(card in getPlayerPermanents(player1turn)) {
-                card.afterEndPhase(this);
-            }
-            getPlayerRace(player1turn).afterEndPhase(this);
-            getPlayerClass(player1turn).afterEndPhase(this);
+            if(turnAction != EpicPvpTurn.GameOver) {
+                // activate any end phase actions against discaded cards
+                for (card in discardedCards) {
+                    card.afterEndPhase(this);
+                }
+                for (special in specials) {
+                    special.afterEndPhase(this);
+                }
+                for (card in getPlayerPermanents(player1turn)) {
+                    card.afterEndPhase(this);
+                }
+                getPlayerRace(player1turn).afterEndPhase(this);
+                getPlayerClass(player1turn).afterEndPhase(this);
 
-            setTurnAction(EpicPvpTurn.EndPhase);
+                setTurnAction(EpicPvpTurn.EndPhase);
+            }
         }
 
-        checkForNextPlayerTurn(player1turn);
-        setHighlights();
+        if(turnAction != EpicPvpTurn.GameOver) {
+            checkForNextPlayerTurn(player1turn);
+            setHighlights();
+        }
         return true;
     }
 
