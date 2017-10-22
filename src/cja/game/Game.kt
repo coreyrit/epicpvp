@@ -24,7 +24,6 @@ class Game {
         (gameState as EpicPvpGameState).setup();
         gameState.setHighlights();
         gameRenderer.render(gameState);
-        click(-1, -1);
     }
 
     fun printSequence(score : Int, route : List<Point>) {
@@ -59,10 +58,10 @@ class Game {
             choices.add(Pair(getStateScore(state), route));
             return;
         }
-//        if(choices.size > 100) {
-//            println("I fond enough choices");
-//            return;
-//        }
+        if(choices.size > 1000) {
+            println("I found enough choices");
+            return;
+        }
         if(depth > 20) {
             println("Something went wrong!");
             return;
@@ -140,7 +139,7 @@ class Game {
         gameRenderer.render(gameState);
         var state = gameState as EpicPvpGameState;
 
-        if(state.player1turn) {
+        if(state.player1turn && state.turnAction != EpicPvpTurn.GameStart) {
             runAi();
         }
     }

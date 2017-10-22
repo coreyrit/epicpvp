@@ -1,6 +1,7 @@
 package cja.game.pvp
 
 enum class EpicPvpTurn {
+    GameStart,
     DrawAggression,
     DrawCards,
     PlayMove,

@@ -10,6 +10,7 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
     var button1 : EpicPvpButton = EpicPvpButton(this, "+2 attack per enemy move");
     var button2 : EpicPvpButton = EpicPvpButton(this, "Discard 2 cards");
     var choosing : Boolean = false;
+    var cardsRemoved : Int = 0;
 
     constructor() : super("Barrel Charge") {
         this.text = "After playing moves: Your enemy chooses - Each of your moves gains two +1 attack counters or they discard two cards.";
@@ -32,25 +33,26 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
             }
             endAction(state);
         } else if(obj == button2) {
-            // do this twice
-            for (i in 1..2) {
-                choosing = true;
-                for (card in state.getPlayerHand(!this.owner).hand) {
-                    chooseCard.hand.add(card);
-                }
-                if (chooseCard.hand.size == 0) {
-                    endAction(state);
-                } else {
-                    chooseCard.setPosition(state.moveArea.x + 50f, state.moveArea.y - 75f, state.moveArea.width - 100f, state.moveArea.height + 150f);
-                    state.gameObjects.add(0, chooseCard);
-                }
+            choosing = true;
+            for (card in state.getPlayerHand(!this.owner).hand) {
+                chooseCard.hand.add(card);
+            }
+            if (chooseCard.hand.size == 0) {
+                endAction(state);
+            } else {
+                chooseCard.setPosition(state.moveArea.x + 50f, state.moveArea.y - 75f, state.moveArea.width - 100f, state.moveArea.height + 150f);
+                state.gameObjects.add(0, chooseCard);
             }
         } else if(choosing && obj == chooseCard) {
             var card = chooseCard.getCardAt(ptx, pty) as EpicPvpCard?;
             if(card != null) {
                 state.getPlayerHand(card.owner).hand.remove(card);
                 state.getPlayerDiscard(card.owner).cards.add(card);
-                endAction(state);
+                chooseCard.hand.remove(card);
+                cardsRemoved ++;
+                if(cardsRemoved >= 2 || state.getPlayerHand(card.owner).hand.size == 0) {
+                    endAction(state);
+                }
             }
         }
 
@@ -90,6 +92,7 @@ public class BarrelChargeCard : SpecialCard, CardProcess, ButtonsCard {
         super.clonePropertiesTo(card)
         if(card is BarrelChargeCard) {
             card.choosing = choosing;
+            card.cardsRemoved = cardsRemoved;
         }
     }
 

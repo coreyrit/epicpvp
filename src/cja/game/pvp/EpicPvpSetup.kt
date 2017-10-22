@@ -148,13 +148,13 @@ public class EpicPvpSetup {
     fun setup(state : EpicPvpGameState) {
         // create decks for both players
         //state.player1deck.cards.addAll(goblinDeck());
-        state.player1deck.cards.addAll(dwarfDeck());
-        state.player1deck.cards.addAll(druidDeck());
-        state.player1deck.shuffle();
-
-        state.player2deck.cards.addAll(humanDeck());
-        state.player2deck.cards.addAll(paladinDeck());
+        state.player2deck.cards.addAll(dwarfDeck());
+        state.player2deck.cards.addAll(druidDeck());
         state.player2deck.shuffle();
+
+        state.player1deck.cards.addAll(humanDeck());
+        state.player1deck.cards.addAll(paladinDeck());
+        state.player1deck.shuffle();
 
         // init card sizes and ids
         var id = 1;

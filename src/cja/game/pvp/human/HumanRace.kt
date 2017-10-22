@@ -5,26 +5,25 @@ import cja.game.pvp.*
 
 public class HumanRace : RaceCard, CardProcess, ButtonsCard {
     var button1 : EpicPvpButton = EpicPvpButton(this, "", false);
-    var button2 : EpicPvpButton = EpicPvpButton(this, "Do NOT use Insight");
+    var button2 : EpicPvpButton = EpicPvpButton(this, "", false);
     var discarding : Boolean = false;
     var discarded : Int = 0;
     var insight : Int = 3;
-    var player : Boolean;
 
     constructor(owner : Boolean) : super(owner, "Human", 5, 2) {
         this.text = "Setup: Put three Insight counters on this card.  Before playing moves: Once per turn, you may remove an Insight counter " +
                 "from this card.  If you do, discard any number of cards from your hand, then draw that many cards.";
-        this.player = owner;
     }
 
     override fun startProcess(state : EpicPvpGameState) {
-        button1.setPosition(this.x, this.y, this.width, this.height);
-        state.gameObjects.add(0, button1);
-        if(player) {
+        if(owner) {
+            button1.setPosition(870f, 10f, 100f, 135f);
             button2.setPosition(state.player1area.playerHand.x, state.player1area.playerHand.y, state.player1area.playerHand.width, state.player1area.playerHand.height);
         } else {
+            button1.setPosition(870f, 650f, 100f, 135f);
             button2.setPosition(state.player2area.playerHand.x, state.player2area.playerHand.y, state.player2area.playerHand.width, state.player2area.playerHand.height);
         }
+        state.gameObjects.add(0, button1);
         state.gameObjects.add(0, button2);
     }
 
@@ -47,6 +46,8 @@ public class HumanRace : RaceCard, CardProcess, ButtonsCard {
             } else {
                 endAction(state);
             }
+        } else {
+            endAction(state); // for now
         }
 
         return true;

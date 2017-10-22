@@ -10,7 +10,9 @@ import cja.game.pvp.paladin.*
 public class EpicPvpGameState : GameState {
     var allCards : MutableMap<Int, EpicPvpCard> = HashMap();
 
-    var player1area : PlayerArea = PlayerArea("blue", DwarfRace(true), DruidClass(true));
+    val startButton = GameButton("Start");
+
+    var player1area : PlayerArea = PlayerArea("blue", HumanRace(true), PaladinClass(true));
     var player1race : RaceCard = player1area.playerRace;
     var player1class : ClassCard = player1area.playerClass;
     var player1deck : GameDeck = player1area.playerDeck;
@@ -21,7 +23,7 @@ public class EpicPvpGameState : GameState {
     var player1permanents : MutableList<EpicPvpCard> = player1area.playerPermanents;
     var player1cardProcesses : MutableList<CardProcess> = ArrayList();
 
-    var player2area : PlayerArea = PlayerArea("red", HumanRace(false), PaladinClass(false));
+    var player2area : PlayerArea = PlayerArea("red", DwarfRace(false), DruidClass(false));
     var player2race : RaceCard = player2area.playerRace;
     var player2class : ClassCard = player2area.playerClass;
     var player2deck : GameDeck = player2area.playerDeck;
@@ -35,7 +37,7 @@ public class EpicPvpGameState : GameState {
     var moveArea : MoveArea = MoveArea();
 
     var player1turn : Boolean = true;
-    var turnAction : EpicPvpTurn = EpicPvpTurn.DrawAggression;
+    var turnAction : EpicPvpTurn = EpicPvpTurn.GameStart;
 
     var aggressionDraw : Int = 2;
     var aggressionRemaining : Int = 0;
@@ -159,6 +161,9 @@ public class EpicPvpGameState : GameState {
     fun setup() {
         EpicPvpSetup().setup(this);
         setHighlights();
+
+        startButton.setPosition(100f, 100f, 100f, 50f);
+        gameObjects.add(0, startButton);
     }
 
     fun getPlayerRace(player : Boolean) : RaceCard {
@@ -228,6 +233,11 @@ public class EpicPvpGameState : GameState {
 
     fun setHighlights() {
         clearHighlights();
+
+        if(turnAction == EpicPvpTurn.GameStart) {
+            startButton.highlight = true;
+            return;
+        }
 
         // current player's turn first
 //        var turn1 = (player1turn && turnAction != EpicPvpTurn.DrawAggression) || (!player1turn && turnAction == EpicPvpTurn.DrawAggression);
@@ -416,7 +426,11 @@ public class EpicPvpGameState : GameState {
         var discard = getPlayerDiscard(player1turn);
 
         if(obj != null) {
-            if(turnAction == EpicPvpTurn.DrawAggression && obj == gameDeck) {
+            if(turnAction == EpicPvpTurn.GameStart && obj == startButton) {
+                gameObjects.remove(startButton);
+                setTurnAction(EpicPvpTurn.DrawAggression);
+            }
+            else if(turnAction == EpicPvpTurn.DrawAggression && obj == gameDeck) {
 //                println("draw aggression");
                 for(card in moveArea.moves.keys) {
                     card.beforeAggressionPhase(this);
